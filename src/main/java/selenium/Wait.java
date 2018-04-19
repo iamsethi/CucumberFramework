@@ -34,6 +34,7 @@ public class Wait {
 				System.out.println("Document is loading");
 			return isPageLoaded;
 		}, timeoutInSeconds);
+		System.out.println("untilPageLoadComplete");
 	}
 
 	public static void until(WebDriver driver, Function<WebDriver, Boolean> waitCondition) {
