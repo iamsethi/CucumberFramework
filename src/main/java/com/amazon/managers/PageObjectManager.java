@@ -6,6 +6,7 @@ import com.amazon.pageObjects.CartPage;
 import com.amazon.pageObjects.CheckoutPage;
 import com.amazon.pageObjects.HomePage;
 import com.amazon.pageObjects.ProductListingPage;
+import com.amazon.pageObjects.SignInPage;
 
 public class PageObjectManager {
 
@@ -14,6 +15,7 @@ public class PageObjectManager {
 	private CartPage cartPage;
 	private HomePage homePage;
 	private CheckoutPage checkoutPage;
+	private SignInPage signInPage;
 
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -33,5 +35,9 @@ public class PageObjectManager {
 
 	public CheckoutPage getCheckoutPage() {
 		return (checkoutPage == null) ? checkoutPage = new CheckoutPage(driver) : checkoutPage;
+	}
+
+	public SignInPage getSignInPage() {
+		return (signInPage == null) ? signInPage = new SignInPage(driver) : signInPage;
 	}
 }

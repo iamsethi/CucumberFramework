@@ -16,7 +16,7 @@ public class ProductListingPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(how = How.CSS, using = "button.single_add_to_cart_button")
+	@FindBy(how = How.NAME, using = "submit.add-to-cart")
 	private WebElement btn_AddToCart;
 
 	@FindAll(@FindBy(how = How.XPATH, using = "//h2"))
