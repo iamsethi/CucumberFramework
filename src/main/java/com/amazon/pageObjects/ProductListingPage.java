@@ -19,7 +19,7 @@ public class ProductListingPage {
 	@FindBy(how = How.CSS, using = "button.single_add_to_cart_button")
 	private WebElement btn_AddToCart;
 
-	@FindAll(@FindBy(how = How.CSS, using = ".noo-product-inner"))
+	@FindAll(@FindBy(how = How.XPATH, using = "//h2"))
 	private List<WebElement> prd_List;
 
 	public void clickOn_AddToCart() {
