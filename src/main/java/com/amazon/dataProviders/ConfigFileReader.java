@@ -1,4 +1,4 @@
-package dataProviders;
+package com.amazon.dataProviders;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,8 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import enums.DriverType;
-import enums.EnvironmentType;
+import com.amazon.enums.DriverType;
+import com.amazon.enums.EnvironmentType;
 
 public class ConfigFileReader {
 	private Properties properties;

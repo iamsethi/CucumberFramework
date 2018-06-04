@@ -1,8 +1,9 @@
-package stepDefinitions;
+package com.amazon.stepDefinitions;
 
-import cucumber.TestContext;
+import com.amazon.cucumber.TestContext;
+import com.amazon.pageObjects.CartPage;
+
 import cucumber.api.java.en.When;
-import pageObjects.CartPage;
 
 public class CartPageSteps {
 

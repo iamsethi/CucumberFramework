@@ -1,13 +1,14 @@
-package dataProviders;
+package com.amazon.dataProviders;
 	import java.io.BufferedReader;
 	import java.io.FileNotFoundException;
 	import java.io.FileReader;
 	import java.io.IOException;
 	import java.util.Arrays;
 	import java.util.List;
-	import com.google.gson.Gson;
-	import managers.FileReaderManager;
-	import testDataTypes.Customer;
+
+import com.amazon.managers.FileReaderManager;
+import com.amazon.testDataTypes.Customer;
+import com.google.gson.Gson;
 	
 public class JsonDataReader {
 	private final String customerFilePath = FileReaderManager.getInstance().getConfigReader().getTestDataResourcePath() + "Customer.json";

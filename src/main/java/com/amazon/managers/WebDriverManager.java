@@ -1,12 +1,13 @@
-package managers;
+package com.amazon.managers;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import enums.DriverType;
-import enums.EnvironmentType;
+
+import com.amazon.enums.DriverType;
+import com.amazon.enums.EnvironmentType;
 
 public class WebDriverManager {
 	private WebDriver driver;

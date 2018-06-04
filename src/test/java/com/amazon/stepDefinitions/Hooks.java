@@ -1,12 +1,14 @@
-package stepDefinitions;
+package com.amazon.stepDefinitions;
 
 import java.io.File;
 import java.io.IOException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
+import com.amazon.cucumber.TestContext;
 import com.cucumber.listener.Reporter;
 import com.google.common.io.Files;
-import cucumber.TestContext;
+
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

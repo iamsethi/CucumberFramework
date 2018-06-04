@@ -1,4 +1,4 @@
-package pageObjects;
+package com.amazon.pageObjects;
 
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -8,8 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-import selenium.Wait;
-import testDataTypes.Customer;
+import com.amazon.selenium.Wait;
+import com.amazon.testDataTypes.Customer;
 
 public class CheckoutPage {
 	WebDriver driver;

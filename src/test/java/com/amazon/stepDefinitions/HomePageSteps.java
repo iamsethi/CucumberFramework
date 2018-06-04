@@ -1,9 +1,10 @@
-package stepDefinitions;
+package com.amazon.stepDefinitions;
 
-import cucumber.TestContext;
+import com.amazon.cucumber.TestContext;
+import com.amazon.pageObjects.HomePage;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import pageObjects.HomePage;
 
 public class HomePageSteps {
 

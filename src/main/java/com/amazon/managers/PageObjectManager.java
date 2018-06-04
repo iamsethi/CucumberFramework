@@ -1,11 +1,11 @@
-package managers;
+package com.amazon.managers;
 
 import org.openqa.selenium.WebDriver;
 
-import pageObjects.CartPage;
-import pageObjects.CheckoutPage;
-import pageObjects.HomePage;
-import pageObjects.ProductListingPage;
+import com.amazon.pageObjects.CartPage;
+import com.amazon.pageObjects.CheckoutPage;
+import com.amazon.pageObjects.HomePage;
+import com.amazon.pageObjects.ProductListingPage;
 
 public class PageObjectManager {
 

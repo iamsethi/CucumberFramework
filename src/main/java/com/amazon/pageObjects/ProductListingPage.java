@@ -1,4 +1,4 @@
-package pageObjects;
+package com.amazon.pageObjects;
 
 import java.util.List;
 import org.openqa.selenium.WebDriver;

@@ -1,21 +1,21 @@
-package runners;
+package com.amazon.runner;
 
 import java.io.File;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 
+import com.amazon.managers.FileReaderManager;
 import com.cucumber.listener.Reporter;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import managers.FileReaderManager;
 
 /**
  * A sample test to demonstrate
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/functionalTests", glue = { "stepDefinitions" }, plugin = {
+@CucumberOptions(features = "src/test/resources/functionalTests", glue = { "com.amazon.stepDefinitions" }, plugin = {
 		"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html" }, monochrome = true)
 
 public class TestRunner {

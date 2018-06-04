@@ -1,10 +1,11 @@
-package stepDefinitions;
+package com.amazon.stepDefinitions;
 
-import cucumber.TestContext;
+import com.amazon.cucumber.TestContext;
+import com.amazon.managers.FileReaderManager;
+import com.amazon.pageObjects.CheckoutPage;
+import com.amazon.testDataTypes.Customer;
+
 import cucumber.api.java.en.When;
-import managers.FileReaderManager;
-import pageObjects.CheckoutPage;
-import testDataTypes.Customer;
 
 public class CheckoutPageSteps {
 	TestContext testContext;

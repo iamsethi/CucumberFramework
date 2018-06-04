@@ -1,7 +1,7 @@
-package managers;
+package com.amazon.managers;
 
-import dataProviders.ConfigFileReader;
-import dataProviders.JsonDataReader;
+import com.amazon.dataProviders.ConfigFileReader;
+import com.amazon.dataProviders.JsonDataReader;
 
 public class FileReaderManager {
 	

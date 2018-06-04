@@ -1,7 +1,7 @@
-package cucumber;
+package com.amazon.cucumber;
 
-import managers.PageObjectManager;
-import managers.WebDriverManager;
+import com.amazon.managers.PageObjectManager;
+import com.amazon.managers.WebDriverManager;
 
 public class TestContext {
 	private WebDriverManager webDriverManager;

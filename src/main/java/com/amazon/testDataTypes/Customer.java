@@ -1,4 +1,4 @@
-package testDataTypes;
+package com.amazon.testDataTypes;
 
 public class Customer {
 	  public String firstName;
