@@ -8,7 +8,13 @@ public class TestContext {
 	private PageObjectManager pageObjectManager;
 
 	public TestContext() {
-		webDriverManager = new WebDriverManager();
+		webDriverManager = WebDriverManager.getInstance();
+		// create driver
+		try {
+			WebDriverManager.getInstance().setDriver();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
 	}
 
