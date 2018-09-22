@@ -35,7 +35,6 @@ public abstract class BasePage {
 	@FindBy(xpath = "//li[@id='home_Tab']/a")
 	public WebElement lnk_home;
 
-
 	// common WebElement locators included in base class
 	public String getTitle() throws Exception {
 		return driver.getTitle();
@@ -60,12 +59,7 @@ public abstract class BasePage {
 	}
 
 	public void logout() {
-		// if (lnk_user_name_old.isPresent() && lnk_user_name_old.isEnabled()) {
-		// lnk_user_name_old.click();
-		// } else {
-		// lnk_user_name_new.click();
-		// }
-		// lnk_logout.click();
+		lnk_logout.click();
 	}
 
 	public void closePopUps() { // NO_UCD (unused code)
@@ -73,9 +67,9 @@ public abstract class BasePage {
 	}
 
 	private void closeHelpBubble() {
-		// if (img_close.isPresent()) {
-		// img_close.click();
-		// }
+
+		img_close.click();
+
 	}
 
 	public void waitForResultTableToLoad() {
