@@ -1,6 +1,8 @@
 package com.amazon.pageObjects;
 
 import java.util.List;
+
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -10,7 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.amazon.selenium.Wait;
-import com.amazon.testDataTypes.Customer;
 
 public class CheckoutPage {
 	WebDriver driver;
@@ -31,7 +32,7 @@ public class CheckoutPage {
 
 	@FindBy(how = How.NAME, using = "shipToThisAddress")
 	private WebElement btn_shipToThisAddress;
-	
+
 	@FindBy(how = How.CLASS_NAME, using = "a-button-inner")
 	private WebElement btn_dlvrToThisAddress;
 
@@ -130,14 +131,14 @@ public class CheckoutPage {
 		Wait.untilPageLoadComplete(driver);
 	}
 
-	public void fill_PersonalDetails(Customer customer) {
-		enter_Name(customer.firstName);
-		enter_Address(customer.address.streetAddress);
-		enter_City(customer.address.city);
-		enter_State(customer.address.state);
-		enter_PostCode(customer.address.postCode);
-		select_Country(customer.address.country);
-		enter_Phone(customer.phoneNumber.mob);
+	public void fill_PersonalDetails(JSONObject customer) {
+		// enter_Name(customer.firstName);
+		// enter_Address(customer.address.streetAddress);
+		// enter_City(customer.address.city);
+		// enter_State(customer.address.state);
+		// enter_PostCode(customer.address.postCode);
+		// select_Country(customer.address.country);
+		// enter_Phone(customer.phoneNumber.mob);
 		btn_shipToThisAddress.click();
 		btn_dlvrToThisAddress.click();
 

@@ -3,7 +3,6 @@ package com.amazon.managers;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -25,7 +24,6 @@ import com.amazon.enums.EnvironmentType;
  *
  */
 public class WebDriverManager {
-	// local variables
 	private static DriverType driverType;
 	private static EnvironmentType environmentType;
 	private static WebDriverManager instance = null;
@@ -35,7 +33,6 @@ public class WebDriverManager {
 	private ThreadLocal<String> sessionPlatform = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionVersion = new ThreadLocal<String>();
 
-	// constructor
 	private WebDriverManager() {
 		driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
 		environmentType = FileReaderManager.getInstance().getConfigReader().getEnvironment();
@@ -78,7 +75,7 @@ public class WebDriverManager {
 				caps.setCapability(FirefoxDriver.PROFILE, ffProfile);
 				caps.setCapability("marionette", true);
 				System.setProperty("webdriver.gecko.driver",
-						FileReaderManager.getInstance().getConfigReader().getDriverPath());
+						FileReaderManager.getInstance().getConfigReader().getDriverPath("gecko.driver.windows.path"));
 				if (optPreferences.length > 0) {
 					processFFProfile(ffProfile, optPreferences);
 				}
@@ -88,14 +85,14 @@ public class WebDriverManager {
 			case CHROME:
 				caps = DesiredCapabilities.chrome();
 				ChromeOptions chOptions = new ChromeOptions();
-				Map<String, Object> chromePrefs = new HashMap<String, Object>();
-				chromePrefs.put("credentials_enable_service", false);
+				HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+				chromePrefs.put("profile.default_content_settings.popups", 0);
 				chOptions.setExperimentalOption("prefs", chromePrefs);
-				chOptions.addArguments("--disable-plugins", "--disable-extensions", "--disable-popup-blocking");
-				caps.setCapability(ChromeOptions.CAPABILITY, chOptions);
-				caps.setCapability("applicationCacheEnabled", false);
+				DesiredCapabilities cap = DesiredCapabilities.chrome();
+				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+				cap.setCapability(ChromeOptions.CAPABILITY, chOptions);
 				System.setProperty("webdriver.chrome.driver",
-						FileReaderManager.getInstance().getConfigReader().getDriverPath());
+						FileReaderManager.getInstance().getConfigReader().getDriverPath("chrome.driver.windows.path"));
 				if (optPreferences.length > 0) {
 					processCHOptions(chOptions, optPreferences);
 				}
@@ -103,11 +100,10 @@ public class WebDriverManager {
 				break;
 			case INTERNETEXPLORER:
 				caps = DesiredCapabilities.internetExplorer();
-				InternetExplorerOptions ieOpts = new InternetExplorerOptions();
-				ieOpts.requireWindowFocus();
-				ieOpts.merge(caps);
-				caps.setCapability("requireWindowFocus", true);
-				System.setProperty("webdriver.ie.driver", "ie_driver_windows_path/IEDriverServer.exe");
+				caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+				caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				System.setProperty("webdriver.ie.driver",
+						FileReaderManager.getInstance().getConfigReader().getDriverPath("ie.driver.windows.path"));
 				if (optPreferences.length > 0) {
 					processDesiredCaps(caps, optPreferences);
 				}
@@ -120,6 +116,8 @@ public class WebDriverManager {
 			((RemoteWebDriver) webDriver.get()).setFileDetector(new LocalFileDetector());
 			break;
 		}
+
+		getDriver().manage().window().maximize();
 
 	}
 

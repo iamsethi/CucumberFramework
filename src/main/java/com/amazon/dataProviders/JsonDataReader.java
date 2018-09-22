@@ -1,45 +1,111 @@
 package com.amazon.dataProviders;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.testng.annotations.DataProvider;
+
 import java.io.FileReader;
-import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.amazon.managers.FileReaderManager;
-import com.amazon.testDataTypes.Customer;
-import com.google.gson.Gson;
-
+/**
+ * @author Ketan Sethi
+ *
+ *         TestNG JSON DataProvider Utility Class
+ *
+ */
 public class JsonDataReader {
-	private final String customerFilePath = FileReaderManager.getInstance().getConfigReader().getTestDataResourcePath()
-			+ "Customer.json";
-	private List<Customer> customerList;
+	public static String dataFile = "";
+	public static String testCaseName = "NA";
 
 	public JsonDataReader() {
-		customerList = getCustomerData();
 	}
 
-	private List<Customer> getCustomerData() {
-		Gson gson = new Gson();
-		BufferedReader bufferReader = null;
-		try {
-			bufferReader = new BufferedReader(new FileReader(customerFilePath));
-			Customer[] customers = gson.fromJson(bufferReader, Customer[].class);
-			return Arrays.asList(customers);
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Json file not found at path : " + customerFilePath);
-		} finally {
-			try {
-				if (bufferReader != null)
-					bufferReader.close();
-			} catch (IOException ignore) {
+	/**
+	 * fetchData method to retrieve test data for specified method
+	 *
+	 * @param method
+	 * @return Object[][]
+	 * @throws Exception
+	 */
+	@DataProvider(name = "fetchData_JSON")
+	public static Object[][] fetchData(Method method) throws Exception {
+		Object rowID, description;
+		Object[][] result;
+		testCaseName = method.getName();
+		List<JSONObject> testDataList = new ArrayList<JSONObject>();
+		JSONArray testData = (JSONArray) extractData_JSON(dataFile).get(method.getName());
+
+		for (int i = 0; i < testData.size(); i++) {
+			testDataList.add((JSONObject) testData.get(i));
+		}
+
+		// include Filter
+		if (System.getProperty("includePattern") != null) {
+			String include = System.getProperty("includePattern");
+			List<JSONObject> newList = new ArrayList<JSONObject>();
+			List<String> tests = Arrays.asList(include.split(",", -1));
+
+			for (String getTest : tests) {
+				for (int i = 0; i < testDataList.size(); i++) {
+					if (testDataList.get(i).toString().contains(getTest)) {
+						newList.add(testDataList.get(i));
+					}
+				}
+			}
+
+			// reassign testRows after filtering tests
+			testDataList = newList;
+		}
+
+		// exclude Filter
+		if (System.getProperty("excludePattern") != null) {
+			String exclude = System.getProperty("excludePattern");
+			List<String> tests = Arrays.asList(exclude.split(",", -1));
+
+			for (String getTest : tests) {
+				// start at end of list and work backwards so index stays in sync
+				for (int i = testDataList.size() - 1; i >= 0; i--) {
+					if (testDataList.get(i).toString().contains(getTest)) {
+						testDataList.remove(testDataList.get(i));
+					}
+				}
 			}
 		}
+
+		// create object for dataprovider to return
+		try {
+			result = new Object[testDataList.size()][testDataList.get(0).size()];
+
+			for (int i = 0; i < testDataList.size(); i++) {
+				rowID = testDataList.get(i).get("rowID");
+				description = testDataList.get(i).get("description");
+				result[i] = new Object[] { rowID, description, testDataList.get(i) };
+			}
+		}
+
+		catch (IndexOutOfBoundsException ie) {
+			result = new Object[0][0];
+		}
+
+		return result;
 	}
 
-	public final Customer getCustomerByName(String customerName) {
-		return customerList.stream().filter(x -> x.firstName.equalsIgnoreCase(customerName)).findAny().get();
+	/**
+	 * extractData_JSON method to get JSON data from file
+	 *
+	 * @param file
+	 * @return JSONObject
+	 * @throws Exception
+	 */
+	public static JSONObject extractData_JSON(String file) throws Exception {
+		FileReader reader = new FileReader(file);
+		JSONParser jsonParser = new JSONParser();
+
+		return (JSONObject) jsonParser.parse(reader);
 	}
 
 }

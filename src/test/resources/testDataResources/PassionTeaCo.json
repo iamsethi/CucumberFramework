@@ -1,8 +1,6 @@
 {
-	"sign_in_on_application": [
+	"tc001_passionTeaCo": [
 		{
-			"rowID": "tc001_passionTeaCo.01",
-			"description": "Navigate Passion Tea Co 'Welcome' Page",
 			"firstName": "Brian",
 			"lastName": "Lee",
 			"age": 35,
@@ -22,28 +20,23 @@
 			}
 		},
 		{
-			"rowID": "tc001_passionTeaCo.02",
-			"description": "Navigate Passion Tea Co 'Our Passion' Page",
-			"menu": "Our Passion",
-			"title": "Our Passion"
-		},
-		{
-			"rowID": "tc001_passionTeaCo.03",
-			"description": "Navigate Passion Tea Co 'Menu' Page",
-			"menu": "Menu",
-			"title": "Menu"
-		},
-		{
-			"rowID": "tc001_passionTeaCo.04",
-			"description": "Navigate Passion Tea Co 'Let's Talk Tea' Page",
-			"menu": "Talk Tea",
-			"title": "Let's Talk Tea"
-		},
-		{
-			"rowID": "tc001_passionTeaCo.05",
-			"description": "Navigate Passion Tea Co 'Check Out' Page",
-			"menu": "Check Out",
-			"title": "Check Out"
+			"firstName": "Stan",
+			"lastName": "Lee",
+			"age": 35,
+			"emailAddress": "testbrianlee@gmail.com",
+			"password": "Login@123",
+			"address": {
+				"streetAddress": "175 East Town St, Columbus",
+				"city": "Ohio",
+				"postCode": "43214",
+				"state": "Columbus",
+				"country": "United States",
+				"county": "Delhi"
+			},
+			"phoneNumber": {
+				"home": "012345678",
+				"mob": "09560146008"
+			}
 		}
 	],
 	"tc002_passionTeaCo": [

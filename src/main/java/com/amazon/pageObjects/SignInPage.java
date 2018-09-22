@@ -1,13 +1,11 @@
 package com.amazon.pageObjects;
 
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-
-import com.amazon.managers.FileReaderManager;
-import com.amazon.testDataTypes.Customer;
 
 public class SignInPage {
 	WebDriver driver;
@@ -37,10 +35,10 @@ public class SignInPage {
 		txtbx_Password.sendKeys(pswd);
 	}
 
-	public void perform_SignIn(Customer customer) {
-		enter_Email(customer.emailAddress);
+	public void perform_SignIn(JSONObject customer) {
+		enter_Email(customer.get("emailAddress").toString());
 		txtbx_Continue.click();
-		enter_Password(customer.password);
+		enter_Password(customer.get("password").toString());
 		txtbx_SignInSubmit.click();
 
 	}
