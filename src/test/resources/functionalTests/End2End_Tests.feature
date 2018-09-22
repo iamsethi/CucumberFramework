@@ -6,7 +6,14 @@ Feature: Automated End2End Tests
     When he search for "dress"
     And choose to buy the first item
     And moves to checkout from mini cart
-    When a 'notify' message is sent to the green box with the properties
+    And I sign in on application
+      """
+      {
+        "id": "123456",
+        "first_name": "Steve",
+        "last_name": "Richert"
+      }
+      """
     And user select new delivery address
     And enter "<customer>" personal details on checkout page
     And select payment method as "check" payment

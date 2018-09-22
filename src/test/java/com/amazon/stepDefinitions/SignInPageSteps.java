@@ -1,7 +1,5 @@
 package com.amazon.stepDefinitions;
 
-import org.json.simple.JSONObject;
-
 import com.amazon.cucumber.TestContext;
 import com.amazon.pageObjects.SignInPage;
 
@@ -17,9 +15,9 @@ public class SignInPageSteps {
 		signInPage = testContext.getPageObjectManager().getSignInPage();
 	}
 
-	@When("^a '(.*)' message is sent to the green box with the properties$")
-	public void sign_in_on_application(String rowID) {
-		// signInPage.perform_SignIn(testData);
+	@When("^\"([^\"]*)\" sign in on application$")
+	public void sign_in_on_application(String customer) {
+		// signInPage.perform_SignIn(customer);
 	}
 
 }

@@ -1,15 +1,14 @@
 package com.amazon.dataProviders;
 
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.testng.annotations.DataProvider;
-
-import java.io.FileReader;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Ketan Sethi
@@ -32,12 +31,12 @@ public class JsonDataReader {
 	 * @throws Exception
 	 */
 	@DataProvider(name = "fetchData_JSON")
-	public static Object[][] fetchData(Method method) throws Exception {
+	public static Object[][] fetchData(String method) throws Exception {
 		Object rowID, description;
 		Object[][] result;
-		testCaseName = method.getName();
+		// testCaseName = method.getName();
 		List<JSONObject> testDataList = new ArrayList<JSONObject>();
-		JSONArray testData = (JSONArray) extractData_JSON(dataFile).get(method.getName());
+		JSONArray testData = (JSONArray) extractData_JSON(dataFile).get(method);
 
 		for (int i = 0; i < testData.size(); i++) {
 			testDataList.add((JSONObject) testData.get(i));

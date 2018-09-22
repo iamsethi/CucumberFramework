@@ -8,12 +8,23 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.amazon.managers.FileReaderManager;
 
-public class HomePage {
+public class HomePage extends BasePage implements BrowserExtras {
 	WebDriver driver;
 
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+	}
+
+	// abstract methods
+	@Override
+	public void setElementWait(Long elementWait) {
+		this.elementWait = elementWait;
+	}
+
+	@Override
+	public Long getElementWait() {
+		return this.elementWait;
 	}
 
 	@FindBy(how = How.NAME, using = "field-keywords")

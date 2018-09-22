@@ -11,7 +11,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import com.amazon.selenium.Wait;
+import com.amazon.selenium.BrowserUtils;
 
 public class CheckoutPage {
 	WebDriver driver;
@@ -98,7 +98,7 @@ public class CheckoutPage {
 	public void check_ShipToDifferentAddress(boolean value) {
 		if (!value)
 			chkbx_ShipToDifferetAddress.click();
-		Wait.untilJqueryIsDone(driver);
+		BrowserUtils.untilJqueryIsDone(driver);
 	}
 
 	public void select_Country(String countryName) {
@@ -117,7 +117,7 @@ public class CheckoutPage {
 		} else {
 			new Exception("Payment Method not recognised : " + paymentMethod);
 		}
-		Wait.untilJqueryIsDone(driver);
+		BrowserUtils.untilJqueryIsDone(driver);
 
 	}
 
@@ -128,7 +128,7 @@ public class CheckoutPage {
 
 	public void clickOn_PlaceOrder() {
 		btn_PlaceOrder.submit();
-		Wait.untilPageLoadComplete(driver);
+		BrowserUtils.untilPageLoadComplete(driver);
 	}
 
 	public void fill_PersonalDetails(JSONObject customer) {
