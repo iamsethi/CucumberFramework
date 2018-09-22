@@ -1,10 +1,9 @@
 package com.amazon.stepDefinitions;
 
 import org.json.simple.JSONObject;
-import org.testng.annotations.Test;
 
 import com.amazon.cucumber.TestContext;
-import com.amazon.dataProviders.JsonDataReader;
+import com.amazon.managers.FileReaderManager;
 import com.amazon.pageObjects.CheckoutPage;
 
 import cucumber.api.java.en.When;
@@ -23,11 +22,15 @@ public class CheckoutPageSteps {
 		checkoutPage.check_ShipToDifferentAddress(false);
 	}
 
-	@Test(groups = {
-			"PASSION_TEA" }, dataProvider = "fetchData_JSON", dataProviderClass = JsonDataReader.class, enabled = true)
 	@When("^enter \"(.*)\" personal details on checkout page$")
-	public void enter_personal_details_on_checkout_page(String rowID, String description, JSONObject testData) {
-		checkoutPage.fill_PersonalDetails(testData);
+	public void enter_personal_details_on_checkout_page(String rowID) {
+		try {
+			JSONObject customer = FileReaderManager.getInstance().getJsonReader().fetchData("Customer");
+			checkoutPage.fill_PersonalDetails(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@When("^select payment method as \"([^\"]*)\" payment$")

@@ -2,7 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BDD Test Suite" verbose="1" parallel="tests"
 	thread-count="1" configfailurepolicy="continue">
-	<test name="FREE CRM Test">
+	<test name="Amazon Website Test">
+		<parameter name="report.config"
+			value="src/test/resources/extent-config.xml" />
 		<classes>
 			<class name="com.amazon.runner.TestRunner" />
 		</classes>

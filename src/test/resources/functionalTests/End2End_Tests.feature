@@ -7,13 +7,6 @@ Feature: Automated End2End Tests
     And choose to buy the first item
     And moves to checkout from mini cart
     And I sign in on application
-      """
-      {
-        "id": "123456",
-        "first_name": "Steve",
-        "last_name": "Richert"
-      }
-      """
     And user select new delivery address
     And enter "<customer>" personal details on checkout page
     And select payment method as "check" payment

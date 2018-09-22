@@ -132,13 +132,13 @@ public class CheckoutPage {
 	}
 
 	public void fill_PersonalDetails(JSONObject customer) {
-		// enter_Name(customer.firstName);
-		// enter_Address(customer.address.streetAddress);
-		// enter_City(customer.address.city);
-		// enter_State(customer.address.state);
-		// enter_PostCode(customer.address.postCode);
-		// select_Country(customer.address.country);
-		// enter_Phone(customer.phoneNumber.mob);
+		enter_Name(customer.get("firstName").toString());
+		enter_Address(customer.get("streetAddress").toString());
+		enter_City(customer.get("city").toString());
+		enter_State(customer.get("state").toString());
+		enter_PostCode(customer.get("postCode").toString());
+		select_Country(customer.get("country").toString());
+		enter_Phone(customer.get("mob").toString());
 		btn_shipToThisAddress.click();
 		btn_dlvrToThisAddress.click();
 

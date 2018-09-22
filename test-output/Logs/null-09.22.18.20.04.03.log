@@ -1,0 +1,19 @@
+
+---------------------------------- Test 'feature' ----------------------------------
+
+[09/22/2018 20:04:03] START-> feature
+
+    ***Test Parameters = Automated End2End Tests
+
+cucumber.runtime.CucumberException: Arity mismatch: Step Definition 'com.amazon.stepDefinitions.CheckoutPageSteps.enter_personal_details_on_checkout_page(String,String,JSONObject) in file:/C:/Users/ketan.sethi/git/cucumber-selenium/target/test-classes/' with pattern [^enter "(.*)" personal details on checkout page$] is declared with 3 parameters. However, the gherkin step has 1 arguments [Brian]. 
+Step: And enter "Brian" personal details on checkout page
+
+    ***Result = FAILED
+
+[09/22/2018 20:06:33] END  -> com.amazon.runner.TestRunner.feature
+
+---
+
+
+Total Passed = 0, Total Failed = 1, Total Skipped = 0
+
