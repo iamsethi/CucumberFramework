@@ -34,7 +34,6 @@ public class WebDriverManager {
 	private ThreadLocal<String> sessionBrowser = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionPlatform = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionVersion = new ThreadLocal<String>();
-	private String getEnv = null;
 
 	private WebDriverManager() {
 		driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();

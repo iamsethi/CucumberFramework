@@ -3,7 +3,7 @@ package com.amazon.utils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-public class Log {
+public class LoggerHelper {
 
 	private static void init() {
 		
@@ -12,7 +12,7 @@ public class Log {
 	}
 
 	// Initialize Log4j logs
-	public static Logger Log = Logger.getLogger(Log.class.getName());
+	public static Logger Log = Logger.getLogger(LoggerHelper.class.getName());
 
 	public static void info(String message) {
 		Log.info(message);

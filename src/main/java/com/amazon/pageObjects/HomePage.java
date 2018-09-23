@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import com.amazon.managers.FileReaderManager;
-import com.amazon.utils.Log;
+import com.amazon.utils.LoggerHelper;
 
 public class HomePage extends BasePage implements BrowserExtras {
 	WebDriver driver;
@@ -35,7 +35,7 @@ public class HomePage extends BasePage implements BrowserExtras {
 	private WebElement txtbx_Go;
 
 	public void perform_Search(String search) {
-		Log.info("#######Perform Search#######");
+		LoggerHelper.info("#######Perform Search#######");
 		txtbx_Srch.sendKeys(search);
 		txtbx_Go.click();
 	}
