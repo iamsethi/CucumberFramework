@@ -4,28 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
 import com.amazon.managers.FileReaderManager;
-import com.amazon.utils.LoggerHelper;
+import com.amazon.utils.Log;
 
-public class HomePage extends BasePage implements BrowserExtras {
+public class HomePage extends PageBase {
 	WebDriver driver;
 
 	public HomePage(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
-
-	// abstract methods
-	@Override
-	public void setElementWait(Long elementWait) {
-		this.elementWait = elementWait;
-	}
-
-	@Override
-	public Long getElementWait() {
-		return this.elementWait;
 	}
 
 	@FindBy(how = How.NAME, using = "field-keywords")
@@ -35,7 +23,7 @@ public class HomePage extends BasePage implements BrowserExtras {
 	private WebElement txtbx_Go;
 
 	public void perform_Search(String search) {
-		LoggerHelper.info("#######Perform Search#######");
+		Log.info("#######Perform Search#######");
 		txtbx_Srch.sendKeys(search);
 		txtbx_Go.click();
 	}
