@@ -11,7 +11,7 @@ import com.amazon.managers.WebDriverManager;
 public abstract class BasePage {
 
 	public long elementWait = FileReaderManager.getInstance().getConfigReader().getImplicitlyWait();
-	WebDriver driver = WebDriverManager.getInstance().getDriver();
+	WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 
 	public BasePage() {
 		PageFactory.initElements(driver, this);

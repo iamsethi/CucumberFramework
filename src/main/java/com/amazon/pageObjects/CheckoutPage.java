@@ -11,7 +11,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import com.amazon.selenium.BrowserUtils;
+import com.amazon.utils.BrowserUtils;
 
 public class CheckoutPage {
 	WebDriver driver;

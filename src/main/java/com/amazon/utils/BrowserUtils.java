@@ -1,4 +1,4 @@
-package com.amazon.selenium;
+package com.amazon.utils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,7 +24,7 @@ import com.amazon.managers.FileReaderManager;
 import com.amazon.managers.WebDriverManager;
 
 public class BrowserUtils {
-	public static WebDriver driver = WebDriverManager.getInstance().getDriver();
+	public static WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 	public static WebDriverWait wait;
 
 	public static void untilJqueryIsDone(WebDriver driver) {
@@ -78,7 +77,7 @@ public class BrowserUtils {
 	 * @throws Exception
 	 */
 	public void waitFor(String title, int timer) throws Exception {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		WebDriverWait exists = new WebDriverWait(driver, timer);
 		exists.until(ExpectedConditions.refreshed(ExpectedConditions.titleContains(title)));
 	}
@@ -392,18 +391,6 @@ public class BrowserUtils {
 	 */
 	public static void clickWaitForElementToAppear(By bylocator, By element) throws Exception {
 		clickWaitForElementToAppear(driver, bylocator, element);
-	}
-
-	/**
-	 * Method to perform click at the center
-	 * 
-	 * @param bylocator
-	 * @throws Exception
-	 */
-	public static void clickAtMiddleOfElement(By bylocator) {
-		Actions action = new Actions(driver);
-		action.click(driver.findElement(bylocator));
-		action.release();
 	}
 
 	/**
@@ -757,7 +744,7 @@ public class BrowserUtils {
 	 * 
 	 * @return the WebDriver reference
 	 */
-	public static WebDriver getDriver() {
+	public static WebDriver getCurrentDriver() {
 		return driver;
 	}
 
@@ -995,7 +982,7 @@ public class BrowserUtils {
 	}
 
 	public static void waitFor(WebElement element, Long timer) throws Exception {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		// wait for the static element to appear
 		WebDriverWait exists = new WebDriverWait(driver, timer);
 		exists.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
@@ -1010,7 +997,7 @@ public class BrowserUtils {
 	 * @throws Exception
 	 */
 	public static void waitFor(By by, int timer) throws Exception {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		// wait for the dynamic element to appear
 		WebDriverWait exists = new WebDriverWait(driver, timer);
 		// examples: By.id(id),By.name(name),By.xpath(locator),
@@ -1028,7 +1015,7 @@ public class BrowserUtils {
 	 * @throws Exception
 	 */
 	public static void waitForGone(By by, int timer) throws Exception {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		// wait for the dynamic element to disappear
 		WebDriverWait exists = new WebDriverWait(driver, timer);
 		// examples: By.id(id),By.name(name),By.xpath(locator),
@@ -1045,7 +1032,7 @@ public class BrowserUtils {
 	 * @throws Exception
 	 */
 	public static void waitForURL(String url, Long seconds) throws Exception {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		WebDriverWait exists = new WebDriverWait(driver, seconds);
 		exists.until(ExpectedConditions.refreshed(ExpectedConditions.urlContains(url)));
 	}

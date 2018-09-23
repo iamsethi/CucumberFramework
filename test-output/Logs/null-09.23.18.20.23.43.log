@@ -1,7 +1,7 @@
 
 ---------------------------------- Test 'feature' ----------------------------------
 
-[09/23/2018 15:17:41] START-> feature
+[09/23/2018 20:23:43] START-> feature
 
     ***Test Parameters = Automated End2End Tests
 
@@ -10,7 +10,7 @@ Command duration or timeout: 0 milliseconds
 
     ***Result = FAILED
 
-[09/23/2018 15:23:10] END  -> com.amazon.runner.TestRunner.feature
+[09/23/2018 20:31:23] END  -> com.amazon.runner.TestRunner.feature
 
 ---
 

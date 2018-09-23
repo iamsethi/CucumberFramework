@@ -1,4 +1,4 @@
-package com.amazon.selenium;
+package com.amazon.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,7 +22,7 @@ public class JavaScriptUtils {
 	 * @param command
 	 */
 	public static void execute(String command) {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(command);
 	}
@@ -34,7 +34,7 @@ public class JavaScriptUtils {
 	 * @param element
 	 */
 	public static void execute(String command, WebElement element) {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(command, element);
 	}
@@ -47,7 +47,7 @@ public class JavaScriptUtils {
 	 * @param element
 	 */
 	public static void click(WebElement element) {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
 	}
@@ -58,7 +58,7 @@ public class JavaScriptUtils {
 	 * @param by
 	 */
 	public static void click(By by) {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		WebElement element = driver.findElement(by);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
@@ -71,7 +71,7 @@ public class JavaScriptUtils {
 	 * @param element
 	 */
 	public static void sendKeys(String keys, WebElement element) {
-		WebDriver driver = WebDriverManager.getInstance().getDriver();
+		WebDriver driver = WebDriverManager.getInstance().getCurrentDriver();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].value='" + keys + "';", element);
 	}

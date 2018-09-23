@@ -113,4 +113,13 @@ public class ConfigFileReader {
 					"Report Config Path not specified in the Configuration.properties file for the Key:reportConfigPath");
 	}
 
+	public String getLoggerPropertyPath() {
+		String loggerPropertyPath = properties.getProperty("log4j.properties");
+		if (loggerPropertyPath != null)
+			return loggerPropertyPath;
+		else
+			throw new RuntimeException(
+					"log4j properties Path not specified in the Configuration.properties file for the Key:log4j.properties");
+	}
+
 }

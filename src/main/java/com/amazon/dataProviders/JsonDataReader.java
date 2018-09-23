@@ -18,10 +18,6 @@ import com.amazon.managers.FileReaderManager;
  */
 public class JsonDataReader {
 	public static String dataFile = FileReaderManager.getInstance().getConfigReader().getTestDataResourcePath();
-	public static String testCaseName = "NA";
-
-	public JsonDataReader() {
-	}
 
 	/**
 	 * fetchData method to retrieve test data for specified method
@@ -30,11 +26,12 @@ public class JsonDataReader {
 	 * @return Object[][]
 	 * @throws Exception
 	 */
-	public JSONObject fetchData(String method) throws Exception {
-		JSONArray dataTarget = (JSONArray) extractData_JSON(dataFile + method + ".json").get("sign_in_on_application");
+	public JSONObject fetchData(String dataTarget) throws Exception {
+		JSONArray testData = (JSONArray) extractData_JSON(dataFile + dataTarget + ".json")
+				.get("sign_in_on_application");
 		List<JSONObject> testDataList = new ArrayList<JSONObject>();
-		for (int i = 0; i < dataTarget.size(); i++) {
-			testDataList.add((JSONObject) dataTarget.get(i));
+		for (int i = 0; i < testData.size(); i++) {
+			testDataList.add((JSONObject) testData.get(i));
 		}
 		return testDataList.get(0);
 	}

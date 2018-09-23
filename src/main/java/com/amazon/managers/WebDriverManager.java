@@ -6,8 +6,7 @@ import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -16,6 +15,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.amazon.enums.DriverType;
 import com.amazon.enums.EnvironmentType;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 
 /**
  * @author Ketan Sethi
@@ -27,10 +29,12 @@ public class WebDriverManager {
 	private static EnvironmentType environmentType;
 	private static WebDriverManager instance = null;
 	private ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
+	private ThreadLocal<AppiumDriver<MobileElement>> mobileDriver = new ThreadLocal<AppiumDriver<MobileElement>>();
 	private ThreadLocal<String> sessionId = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionBrowser = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionPlatform = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionVersion = new ThreadLocal<String>();
+	private String getEnv = null;
 
 	private WebDriverManager() {
 		driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
@@ -67,35 +71,27 @@ public class WebDriverManager {
 		switch (environmentType) {
 		case LOCAL:
 			switch (driverType) {
-			case FIREFOX:
-				caps = DesiredCapabilities.firefox();
-				FirefoxProfile ffProfile = new FirefoxProfile();
-				ffProfile.setPreference("browser.autofocus", true);
-				caps.setCapability(FirefoxDriver.PROFILE, ffProfile);
-				caps.setCapability("marionette", true);
-				System.setProperty("webdriver.gecko.driver",
-						FileReaderManager.getInstance().getConfigReader().getDriverPath("gecko.driver.windows.path"));
-				if (optPreferences.length > 0) {
-					processFFProfile(ffProfile, optPreferences);
-				}
-				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), caps));
-
+			case FIREFOX: // about:config
+				FirefoxOptions ffOptions = new FirefoxOptions();
+				// Start firefox maximized
+				ffOptions.addArguments("start-maximized");
+				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), ffOptions));
 				break;
-			case CHROME:
-				caps = DesiredCapabilities.chrome();
+			case CHROME: // chrome://flags
 				ChromeOptions chOptions = new ChromeOptions();
-				HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-				chromePrefs.put("profile.default_content_settings.popups", 0);
-				chOptions.setExperimentalOption("prefs", chromePrefs);
-				DesiredCapabilities cap = DesiredCapabilities.chrome();
-				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-				cap.setCapability(ChromeOptions.CAPABILITY, chOptions);
+				// Start Chrome maximized
+				chOptions.addArguments("start-maximized");
+				chOptions.addArguments("--disable-plugins", "--disable-extensions", "--disable-popup-blocking");
+				// Set a Chrome preference
+				Map<String, Object> prefs = new HashMap<String, Object>();
+				prefs.put("profile.default_content_settings.popups", 0);
+				chOptions.setExperimentalOption("prefs", prefs);
 				System.setProperty("webdriver.chrome.driver",
 						FileReaderManager.getInstance().getConfigReader().getDriverPath("chrome.driver.windows.path"));
 				if (optPreferences.length > 0) {
 					processCHOptions(chOptions, optPreferences);
 				}
-				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), caps));
+				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), chOptions));
 				break;
 			case INTERNETEXPLORER:
 				caps = DesiredCapabilities.internetExplorer();
@@ -104,7 +100,7 @@ public class WebDriverManager {
 				System.setProperty("webdriver.ie.driver",
 						FileReaderManager.getInstance().getConfigReader().getDriverPath("ie.driver.windows.path"));
 				if (optPreferences.length > 0) {
-					processDesiredCaps(caps, optPreferences);
+					// processDesiredCaps(caps, optPreferences);
 				}
 				webDriver.set(new InternetExplorerDriver(caps));
 				break;
@@ -115,18 +111,59 @@ public class WebDriverManager {
 			((RemoteWebDriver) webDriver.get()).setFileDetector(new LocalFileDetector());
 			break;
 		}
-
+		sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
+		sessionBrowser.set(((RemoteWebDriver) webDriver.get()).getCapabilities().getBrowserName());
+		sessionPlatform.set(((RemoteWebDriver) webDriver.get()).getCapabilities().getPlatform().toString());
 		getDriver().manage().window().maximize();
 
 	}
 
 	/**
-	 * getDriver method to retrieve active driver
+	 * overloaded setDriver method to switch driver to specific AppiumDriver if
+	 * running concurrent drivers
+	 *
+	 * @param driver
+	 *            AppiumDriver instance to switch to
+	 */
+	public void setDriver(AppiumDriver<MobileElement> driver) {
+		mobileDriver.set(driver);
+		sessionId.set(mobileDriver.get().getSessionId().toString());
+		sessionBrowser.set(mobileDriver.get().getCapabilities().getBrowserName());
+		sessionPlatform.set(mobileDriver.get().getCapabilities().getPlatform().toString());
+	}
+
+	/**
+	 * getDriver method will retrieve the active WebDriver
 	 *
 	 * @return WebDriver
 	 */
 	public WebDriver getDriver() {
 		return webDriver.get();
+	}
+
+	/**
+	 * getDriver method will retrieve the active AppiumDriver
+	 *
+	 * @param mobile
+	 *            boolean parameter
+	 * @return AppiumDriver
+	 */
+	public AppiumDriver<MobileElement> getDriver(boolean mobile) {
+		return mobileDriver.get();
+	}
+
+	/**
+	 * getCurrentDriver method will retrieve the active WebDriver or AppiumDriver
+	 *
+	 * @return WebDriver
+	 */
+	public WebDriver getCurrentDriver() {
+		if (getInstance().getSessionBrowser().contains("iphone") || getInstance().getSessionBrowser().contains("ipad")
+				|| getInstance().getSessionBrowser().contains("android")) {
+			return getInstance().getDriver(true);
+		} else {
+			return getInstance().getDriver();
+		}
 	}
 
 	/**
@@ -149,7 +186,7 @@ public class WebDriverManager {
 	 * @return String
 	 * @throws Exception
 	 */
-	public String getSessionId() throws Exception {
+	public String getSessionId() {
 		return sessionId.get();
 	}
 
@@ -159,7 +196,7 @@ public class WebDriverManager {
 	 * @return String
 	 * @throws Exception
 	 */
-	public String getSessionBrowser() throws Exception {
+	public String getSessionBrowser() {
 		return sessionBrowser.get();
 	}
 
@@ -169,7 +206,7 @@ public class WebDriverManager {
 	 * @return String
 	 * @throws Exception
 	 */
-	public String getSessionVersion() throws Exception {
+	public String getSessionVersion() {
 		return sessionVersion.get();
 	}
 
@@ -179,61 +216,8 @@ public class WebDriverManager {
 	 * @return String
 	 * @throws Exception
 	 */
-	public String getSessionPlatform() throws Exception {
+	public String getSessionPlatform() {
 		return sessionPlatform.get();
-	}
-
-	/**
-	 * Process Desired Capabilities method to override default browser or mobile
-	 * driver behavior
-	 *
-	 * @param caps
-	 *            - the DesiredCapabilities object
-	 * @param options
-	 *            - the key: value pair map
-	 * @throws Exception
-	 */
-	private void processDesiredCaps(DesiredCapabilities caps, Map<String, Object>[] options) throws Exception {
-		for (int i = 0; i < options.length; i++) {
-			Object[] keys = options[i].keySet().toArray();
-			Object[] values = options[i].values().toArray();
-			for (int j = 0; j < keys.length; j++) {
-				if (values[j] instanceof Integer) {
-					caps.setCapability(keys[j].toString(), (int) values[j]);
-				} else if (values[j] instanceof Boolean) {
-					caps.setCapability(keys[j].toString(), (boolean) values[j]);
-				} else if (Boolean.parseBoolean(values[j].toString())) {
-					caps.setCapability(keys[j].toString(), Boolean.valueOf(values[j].toString()));
-				} else {
-					caps.setCapability(keys[j].toString(), values[j].toString());
-				}
-			}
-		}
-	}
-
-	/**
-	 * Process Firefox Profile Preferences method to override default browser driver
-	 * behavior
-	 *
-	 * @param caps
-	 *            - the FirefoxProfile object
-	 * @param options
-	 *            - the key: value pair map
-	 * @throws Exception
-	 */
-	private void processFFProfile(FirefoxProfile profile, Map<String, Object>[] options) throws Exception {
-		for (int i = 0; i < options.length; i++) {
-			Object[] keys = options[i].keySet().toArray();
-			Object[] values = options[i].values().toArray();
-			// same as Desired Caps except the following difference
-			for (int j = 0; j < keys.length; j++) {
-
-				if (values[j] instanceof Integer) {
-					profile.setPreference(keys[j].toString(), (int) values[j]);
-				}
-				// etc...
-			}
-		}
 	}
 
 	/**
@@ -245,7 +229,7 @@ public class WebDriverManager {
 	 *            - the key: value pair map
 	 * @throws Exception
 	 */
-	private void processCHOptions(ChromeOptions chOptions, Map<String, Object>[] options) throws Exception {
+	private void processCHOptions(ChromeOptions chOptions, Map<String, Object>[] options) {
 		for (int i = 0; i < options.length; i++) {
 			Object[] keys = options[i].keySet().toArray();
 			Object[] values = options[i].values().toArray();
