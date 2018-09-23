@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -63,7 +62,7 @@ public class WebDriverManager {
 
 	@SafeVarargs
 	public final void setDriver(Map<String, Object>... optPreferences) throws Exception {
-		String remoteHubURL = "http://127.0.0.1:4444/wd/hub";
+		String remoteHubURL = "http://localhost:4444/wd/hub";
 		DesiredCapabilities caps = null;
 		switch (environmentType) {
 		case LOCAL:
@@ -79,7 +78,7 @@ public class WebDriverManager {
 				if (optPreferences.length > 0) {
 					processFFProfile(ffProfile, optPreferences);
 				}
-				webDriver.set(new FirefoxDriver(caps));
+				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), caps));
 
 				break;
 			case CHROME:
@@ -96,7 +95,7 @@ public class WebDriverManager {
 				if (optPreferences.length > 0) {
 					processCHOptions(chOptions, optPreferences);
 				}
-				webDriver.set(new ChromeDriver(caps));
+				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), caps));
 				break;
 			case INTERNETEXPLORER:
 				caps = DesiredCapabilities.internetExplorer();
