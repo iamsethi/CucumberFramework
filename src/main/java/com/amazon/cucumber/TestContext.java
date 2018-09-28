@@ -1,21 +1,17 @@
 package com.amazon.cucumber;
 
+import com.amazon.managers.FileReaderManager;
 import com.amazon.managers.PageObjectManager;
 import com.amazon.managers.WebDriverManager;
 
 public class TestContext {
 	private WebDriverManager webDriverManager;
+	private FileReaderManager fileReaderManager;
 	private PageObjectManager pageObjectManager;
 
 	public TestContext() {
 		webDriverManager = WebDriverManager.getInstance();
-		//////////////////////////////////////////////////////////////////////
-		try {
-			WebDriverManager.getInstance().setDriver();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		/////////////////////////////////////////////////////////////////////////
+		fileReaderManager = FileReaderManager.getInstance();
 		pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
 	}
 
@@ -25,6 +21,10 @@ public class TestContext {
 
 	public PageObjectManager getPageObjectManager() {
 		return pageObjectManager;
+	}
+
+	public FileReaderManager getFileReaderManager() {
+		return fileReaderManager;
 	}
 
 }

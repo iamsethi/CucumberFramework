@@ -25,7 +25,7 @@ public class CheckoutPageSteps {
 	@When("^enter \"(.*)\" personal details on checkout page$")
 	public void enter_personal_details_on_checkout_page(String rowID) {
 		try {
-			JSONObject customer = FileReaderManager.getInstance().getJsonReader().fetchData("Customer");
+			JSONObject customer = testContext.getFileReaderManager().getJsonReader().fetchData("Customer");
 			checkoutPage.fill_PersonalDetails(customer);
 		} catch (Exception e) {
 			e.printStackTrace();

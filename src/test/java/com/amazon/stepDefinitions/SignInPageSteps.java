@@ -21,7 +21,7 @@ public class SignInPageSteps {
 	@When("^I sign in on application$")
 	public void i_sign_in_on_application() {
 		try {
-			JSONObject customer = FileReaderManager.getInstance().getJsonReader().fetchData("Customer");
+			JSONObject customer = testContext.getFileReaderManager().getJsonReader().fetchData("Customer");
 			signInPage.perform_SignIn(customer);
 		} catch (Exception e) {
 			e.printStackTrace();

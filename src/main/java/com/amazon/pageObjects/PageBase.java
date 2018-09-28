@@ -1,5 +1,6 @@
 package com.amazon.pageObjects;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
@@ -16,6 +17,7 @@ import com.google.common.base.Function;
 @SuppressWarnings("rawtypes")
 public abstract class PageBase {
 	private WebDriver driver;
+	private Logger Log = ILog.getLogger(PageBase.class);
 
 	public PageBase(WebDriver driver) {
 		if (driver == null)
@@ -53,10 +55,10 @@ public abstract class PageBase {
 		try {
 			locator = getFindByAnno(childClass.getDeclaredField(element).getAnnotation(FindBy.class));
 		} catch (SecurityException | NoSuchFieldException e) {
-			ILog.info(e);
+			Log.info(e);
 			throw e;
 		}
-		ILog.info(locator);
+		Log.info(locator);
 		return locator;
 	}
 
@@ -73,14 +75,14 @@ public abstract class PageBase {
 
 			@Override
 			public Boolean apply(WebDriver driver) {
-				ILog.debug("Waiting for Element : " + element);
+				Log.debug("Waiting for Element : " + element);
 				return element.isDisplayed();
 			}
 		};
 	}
 
 	public boolean checkForTitle(String title) {
-		ILog.info(title);
+		Log.info(title);
 		if (title == null || title.isEmpty())
 			throw new IllegalArgumentException(title);
 		return driver.getTitle().trim().contains(title);
