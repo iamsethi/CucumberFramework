@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import com.amazon.interfaces.Log;
 import com.amazon.managers.FileReaderManager;
-import com.amazon.utils.Log;
 
 public class HomePage extends PageBase {
 	WebDriver driver;

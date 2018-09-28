@@ -13,7 +13,7 @@ public class HomePageSteps {
 	HomePage homePage;
 
 	public HomePageSteps(TestContext context) {
-		testContext = context;
+		this.testContext = context;
 		homePage = testContext.getPageObjectManager().getHomePage();
 	}
 

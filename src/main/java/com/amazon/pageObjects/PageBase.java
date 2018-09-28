@@ -1,8 +1,3 @@
-/**
- * @author rahul.rathore
- *	
- *	29-Jul-2016
- */
 package com.amazon.pageObjects;
 
 import org.openqa.selenium.By;
@@ -15,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.amazon.utils.Log;
+import com.amazon.interfaces.Log;
 import com.google.common.base.Function;
 
 @SuppressWarnings("rawtypes")

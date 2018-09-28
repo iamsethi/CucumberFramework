@@ -72,8 +72,6 @@ public class WebDriverManager {
 			switch (driverType) {
 			case FIREFOX: // about:config
 				FirefoxOptions ffOptions = new FirefoxOptions();
-				// Start firefox maximized
-				ffOptions.addArguments("start-maximized");
 				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), ffOptions));
 				break;
 			case CHROME: // chrome://flags
@@ -102,6 +100,10 @@ public class WebDriverManager {
 					// processDesiredCaps(caps, optPreferences);
 				}
 				webDriver.set(new InternetExplorerDriver(caps));
+				break;
+			case ANDROID:
+				break;
+			default:
 				break;
 			}
 			break;
