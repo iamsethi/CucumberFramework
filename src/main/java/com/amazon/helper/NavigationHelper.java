@@ -2,14 +2,16 @@ package com.amazon.helper;
 
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import com.amazon.interfaces.ILog;
 import com.amazon.interfaces.IwebComponent;
-import com.amazon.interfaces.Log;
 
 public class NavigationHelper implements IwebComponent {
 
 	private WebDriver driver;
+	private Logger Log = ILog.getLogger(NavigationHelper.class);
 
 	public NavigationHelper(WebDriver driver) {
 		this.driver = driver;

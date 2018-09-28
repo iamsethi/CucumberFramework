@@ -3,14 +3,16 @@ package com.amazon.helper;
 import java.util.LinkedList;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.amazon.interfaces.Log;
+import com.amazon.interfaces.ILog;
 
 public class BrowserHelper extends GenericHelper {
 
 	private WebDriver driver;
+	private Logger Log = ILog.getLogger(BrowserHelper.class);
 
 	public BrowserHelper(WebDriver driver) {
 		super(driver);

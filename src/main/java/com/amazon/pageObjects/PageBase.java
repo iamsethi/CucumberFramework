@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.amazon.interfaces.Log;
+import com.amazon.interfaces.ILog;
 import com.google.common.base.Function;
 
 @SuppressWarnings("rawtypes")
@@ -53,10 +53,10 @@ public abstract class PageBase {
 		try {
 			locator = getFindByAnno(childClass.getDeclaredField(element).getAnnotation(FindBy.class));
 		} catch (SecurityException | NoSuchFieldException e) {
-			Log.info(e);
+			ILog.info(e);
 			throw e;
 		}
-		Log.info(locator);
+		ILog.info(locator);
 		return locator;
 	}
 
@@ -73,14 +73,14 @@ public abstract class PageBase {
 
 			@Override
 			public Boolean apply(WebDriver driver) {
-				Log.debug("Waiting for Element : " + element);
+				ILog.debug("Waiting for Element : " + element);
 				return element.isDisplayed();
 			}
 		};
 	}
 
 	public boolean checkForTitle(String title) {
-		Log.info(title);
+		ILog.info(title);
 		if (title == null || title.isEmpty())
 			throw new IllegalArgumentException(title);
 		return driver.getTitle().trim().contains(title);

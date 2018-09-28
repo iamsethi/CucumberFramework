@@ -3,13 +3,16 @@ package com.amazon.helper;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.amazon.interfaces.Log;
+import com.amazon.interfaces.ILog;
 
 public class GridHelper extends GenericHelper {
+
+	private Logger Log = ILog.getLogger(GridHelper.class);
 
 	public GridHelper(WebDriver driver) {
 		super(driver);

@@ -3,6 +3,7 @@ package com.amazon.helper;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,12 +15,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.amazon.dataProviders.ConfigFileReader;
-import com.amazon.interfaces.Log;
+import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 
 public class WaitHelper extends GenericHelper {
 
 	private WebDriver driver;
+	private Logger Log = ILog.getLogger(WaitHelper.class);
 	private static ConfigFileReader configFileReader = FileReaderManager.getInstance().getConfigReader();
 
 	public WaitHelper(WebDriver driver) {

@@ -12,12 +12,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.amazon.interfaces.ILog;
 import com.amazon.interfaces.IwebComponent;
-import com.amazon.interfaces.Log;
 
 public class GenericHelper implements IwebComponent {
 
 	private WebDriver driver;
+	private Logger Log = ILog.getLogger(GenericHelper.class);
 
 	public GenericHelper(WebDriver driver) {
 		this.driver = driver;

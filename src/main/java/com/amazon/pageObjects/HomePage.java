@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.amazon.interfaces.Log;
+import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 
 public class HomePage extends PageBase {
@@ -23,7 +23,7 @@ public class HomePage extends PageBase {
 	private WebElement txtbx_Go;
 
 	public void perform_Search(String search) {
-		Log.info("#######Perform Search#######");
+		ILog.info("#######Perform Search#######");
 		txtbx_Srch.sendKeys(search);
 		txtbx_Go.click();
 	}

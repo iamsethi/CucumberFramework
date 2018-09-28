@@ -1,16 +1,18 @@
 package com.amazon.helper;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.amazon.interfaces.ILog;
 import com.amazon.interfaces.IwebComponent;
-import com.amazon.interfaces.Log;
 
 public class JavaScriptHelper implements IwebComponent {
 
 	private WebDriver driver;
+	private Logger Log = ILog.getLogger(JavaScriptHelper.class);
 
 	public JavaScriptHelper(WebDriver driver) {
 		this.driver = driver;

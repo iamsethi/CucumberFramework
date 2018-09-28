@@ -1,14 +1,16 @@
 package com.amazon.helper;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.amazon.interfaces.Log;
+import com.amazon.interfaces.ILog;
 
 public class LinkHelper extends GenericHelper {
 
 	private WebDriver driver;
+	private Logger Log = ILog.getLogger(LinkHelper.class);
 
 	public LinkHelper(WebDriver driver) {
 		super(driver);
