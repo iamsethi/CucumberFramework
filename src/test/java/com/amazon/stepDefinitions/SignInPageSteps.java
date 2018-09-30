@@ -3,7 +3,6 @@ package com.amazon.stepDefinitions;
 import org.json.simple.JSONObject;
 
 import com.amazon.cucumber.TestContext;
-import com.amazon.managers.FileReaderManager;
 import com.amazon.pageObjects.SignInPage;
 
 import cucumber.api.java.en.When;

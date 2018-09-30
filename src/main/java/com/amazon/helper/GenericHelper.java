@@ -27,7 +27,7 @@ public class GenericHelper implements IwebComponent {
 
 	public WebElement getElement(By locator) {
 		Log.info(locator);
-		if (IsElementPresentQuick(locator))
+		if (IsElementPresent(locator))
 			return driver.findElement(locator);
 
 		try {
@@ -56,7 +56,7 @@ public class GenericHelper implements IwebComponent {
 		return null;
 	}
 
-	public boolean IsElementPresentQuick(By locator) {
+	public boolean IsElementPresent(By locator) {
 		boolean flag = driver.findElements(locator).size() >= 1;
 		Log.info(flag);
 		return flag;

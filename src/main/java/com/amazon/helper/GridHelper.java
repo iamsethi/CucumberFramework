@@ -20,13 +20,13 @@ public class GridHelper extends GenericHelper {
 
 	protected String getHeaderXpath(String tableIdoRxPath) {
 		Log.debug(tableIdoRxPath);
-		return IsElementPresentQuick(By.id(tableIdoRxPath)) ? "//table[@id='" + tableIdoRxPath + "']//thead"
+		return IsElementPresent(By.id(tableIdoRxPath)) ? "//table[@id='" + tableIdoRxPath + "']//thead"
 				: tableIdoRxPath + "//thead";
 	}
 
 	protected String getTableBodyXpath(String tableIdoRxPath) {
 		Log.debug(tableIdoRxPath);
-		return IsElementPresentQuick(By.id(tableIdoRxPath)) ? "//table[@id='" + tableIdoRxPath + "']//tbody"
+		return IsElementPresent(By.id(tableIdoRxPath)) ? "//table[@id='" + tableIdoRxPath + "']//tbody"
 				: tableIdoRxPath + "//tbody";
 	}
 

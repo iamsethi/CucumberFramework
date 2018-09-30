@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -15,6 +16,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.amazon.enums.DriverType;
 import com.amazon.enums.EnvironmentType;
+import com.amazon.interfaces.ILog;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -34,6 +36,7 @@ public class WebDriverManager {
 	private ThreadLocal<String> sessionBrowser = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionPlatform = new ThreadLocal<String>();
 	private ThreadLocal<String> sessionVersion = new ThreadLocal<String>();
+	private Logger Log = ILog.getLogger(WebDriverManager.class);
 
 	private WebDriverManager() {
 		driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
@@ -72,6 +75,7 @@ public class WebDriverManager {
 			switch (driverType) {
 			case FIREFOX: // about:config
 				FirefoxOptions ffOptions = new FirefoxOptions();
+				Log.debug("Launching Firefox browser !!!");
 				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), ffOptions));
 				break;
 			case CHROME: // chrome://flags
@@ -88,7 +92,8 @@ public class WebDriverManager {
 				if (optPreferences.length > 0) {
 					processCHOptions(chOptions, optPreferences);
 				}
-				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), chOptions));
+				Log.debug("Launching Chrome browser !!!");
+				webDriver.set(new RemoteWebDriver(chOptions));
 				break;
 			case INTERNETEXPLORER:
 				caps = DesiredCapabilities.internetExplorer();
@@ -99,6 +104,7 @@ public class WebDriverManager {
 				if (optPreferences.length > 0) {
 					// processDesiredCaps(caps, optPreferences);
 				}
+				Log.debug("Launching IE browser !!!");
 				webDriver.set(new InternetExplorerDriver(caps));
 				break;
 			case ANDROID:

@@ -1,0 +1,41 @@
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q)
+
+https://aerokube.com/selenoid/latest/#_prepare_configuration
+
+###Prepare Configuration###
+config/browsers.json
+--imp should be under config directory
+
+
+###IMAGE###
+docker pull selenoid/vnc:firefox_57.0.
+https://aerokube.com/selenoid/latest/#_browser_image_information
+
+###start Selenoid container###
+
+Linux
+docker run -d                                   \
+--name selenoid                                 \
+-p 4444:4444                                    \
+-v /var/run/docker.sock:/var/run/docker.sock    \
+-v `pwd`/config/:/etc/selenoid/:ro              \
+aerokube/selenoid:latest-release
+
+
+Windows PowerShell
+> $current = $PWD -replace "\\", "/" -replace "C", "c"  
+> docker run -d                                         `
+--name selenoid                                         `
+-p 4444:4444                                            `
+-v //var/run/docker.sock:/var/run/docker.sock           `
+-v ${current}/config/:/etc/selenoid/:ro                 `
+aerokube/selenoid:latest-release
+>> aerokube/selenoid:latest-release
+
+
+
+###Selenoid UI###  http://localhost:8080 
+
+docker run -d --name selenoid-ui --link selenoid -p 8080:8080  aerokube/selenoid-ui --selenoid-uri=http://selenoid:4444
