@@ -117,24 +117,4 @@ public class ConfigFileReader {
 					"Test Data Resource Path not specified in the Configuration.properties file for the Key:testDataResourcePath");
 	}
 
-	public String getReportConfigPath() {
-		String reportConfigPath = properties.getProperty("reportConfigPath");
-		Log.debug(reportConfigPath);
-		if (reportConfigPath != null)
-			return reportConfigPath;
-		else
-			throw new RuntimeException(
-					"Report Config Path not specified in the Configuration.properties file for the Key:reportConfigPath");
-	}
-
-	public String getLoggerPropertyPath() {
-		String loggerPropertyPath = properties.getProperty("log4j.properties");
-		Log.debug(loggerPropertyPath);
-		if (loggerPropertyPath != null)
-			return loggerPropertyPath;
-		else
-			throw new RuntimeException(
-					"log4j properties Path not specified in the Configuration.properties file for the Key:log4j.properties");
-	}
-
 }

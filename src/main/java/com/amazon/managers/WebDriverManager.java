@@ -6,12 +6,13 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.amazon.enums.DriverType;
@@ -71,7 +72,7 @@ public class WebDriverManager {
 		String remoteHubURL = "http://localhost:4444/wd/hub";
 		DesiredCapabilities caps = null;
 		switch (environmentType) {
-		case LOCAL:
+		case REMOTE:
 			switch (driverType) {
 			case FIREFOX: // about:config
 				FirefoxOptions ffOptions = new FirefoxOptions();
@@ -93,7 +94,7 @@ public class WebDriverManager {
 					processCHOptions(chOptions, optPreferences);
 				}
 				Log.debug("Launching Chrome browser !!!");
-				webDriver.set(new RemoteWebDriver(chOptions));
+				webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), chOptions));
 				break;
 			case INTERNETEXPLORER:
 				caps = DesiredCapabilities.internetExplorer();
@@ -113,9 +114,47 @@ public class WebDriverManager {
 				break;
 			}
 			break;
-		case REMOTE:
-			webDriver.set(new RemoteWebDriver(new URL(remoteHubURL), caps));
-			((RemoteWebDriver) webDriver.get()).setFileDetector(new LocalFileDetector());
+		case LOCAL:
+			switch (driverType) {
+			case FIREFOX: // about:config
+				FirefoxOptions ffOptions = new FirefoxOptions();
+				Log.debug("Launching Firefox browser !!!");
+				webDriver.set(new FirefoxDriver(caps));
+				break;
+			case CHROME: // chrome://flags
+				ChromeOptions chOptions = new ChromeOptions();
+				// Start Chrome maximized
+				chOptions.addArguments("start-maximized");
+				chOptions.addArguments("--disable-plugins", "--disable-extensions", "--disable-popup-blocking");
+				// Set a Chrome preference
+				Map<String, Object> prefs = new HashMap<String, Object>();
+				prefs.put("profile.default_content_settings.popups", 0);
+				chOptions.setExperimentalOption("prefs", prefs);
+				System.setProperty("webdriver.chrome.driver",
+						FileReaderManager.getInstance().getConfigReader().getDriverPath("chrome.driver.windows.path"));
+				if (optPreferences.length > 0) {
+					processCHOptions(chOptions, optPreferences);
+				}
+				Log.debug("Launching Chrome browser !!!");
+				webDriver.set(new ChromeDriver(caps));
+				break;
+			case INTERNETEXPLORER:
+				caps = DesiredCapabilities.internetExplorer();
+				caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+				caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				System.setProperty("webdriver.ie.driver",
+						FileReaderManager.getInstance().getConfigReader().getDriverPath("ie.driver.windows.path"));
+				if (optPreferences.length > 0) {
+					// processDesiredCaps(caps, optPreferences);
+				}
+				Log.debug("Launching IE browser !!!");
+				webDriver.set(new InternetExplorerDriver(caps));
+				break;
+			case ANDROID:
+				break;
+			default:
+				break;
+			}
 			break;
 		}
 		sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
