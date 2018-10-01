@@ -33,7 +33,6 @@ public class WaitHelper extends GenericHelper {
 	private WebDriverWait getWait(int timeOutInSeconds, int pollingEveryInMiliSec) {
 		Log.debug("");
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-		wait.pollingEvery(pollingEveryInMiliSec, TimeUnit.MILLISECONDS);
 		wait.ignoring(NoSuchElementException.class);
 		wait.ignoring(ElementNotVisibleException.class);
 		wait.ignoring(StaleElementReferenceException.class);
