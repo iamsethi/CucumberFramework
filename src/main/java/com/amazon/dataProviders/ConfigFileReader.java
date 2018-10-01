@@ -24,7 +24,6 @@ public class ConfigFileReader {
 			properties = new Properties();
 			try {
 				properties.load(reader);
-				Log.debug("Config file loaded !!!");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
