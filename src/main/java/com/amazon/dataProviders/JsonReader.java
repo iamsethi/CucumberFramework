@@ -40,7 +40,7 @@ public class JsonReader {
 		JSONParser jsonParser = new JSONParser();
 
 		try (FileReader reader = new FileReader(
-				"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\employee.json")) {
+				"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\sfa.json")) {
 			// Read JSON file
 			Object obj = jsonParser.parse(reader);
 
@@ -48,7 +48,7 @@ public class JsonReader {
 			// System.out.println(employeeList);
 
 			// Iterate over employee array
-			employeeList.forEach(emp -> parseEmployeeObject((JSONObject) emp));
+			employeeList.forEach(data -> parseDataObject((JSONObject) data));
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -59,11 +59,11 @@ public class JsonReader {
 		}
 	}
 
-	private static void parseEmployeeObject(JSONObject employee) {
-		Iterator<?> keys = employee.keySet().iterator();
+	private static void parseDataObject(JSONObject data) {
+		Iterator<?> keys = data.keySet().iterator();
 		while (keys.hasNext()) {
 			Object key = keys.next();
-			JSONObject page = (JSONObject) employee.get(key);
+			JSONObject page = (JSONObject) data.get(key);
 			// Get employee first name
 			String firstName = (String) page.get("firstName");
 			System.out.println(firstName);
