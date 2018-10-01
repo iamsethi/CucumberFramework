@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -31,24 +32,6 @@ public class JsonReader {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
-
-		try {
-			JSONObject rootJSON = (JSONObject) new JSONParser().parse(new FileReader(
-					"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\sfa.json"));
-			JSONArray commonData = (JSONArray) rootJSON.get("CommonData");
-			for (Object dataList : commonData.toArray()) {
-				JSONObject data = (JSONObject) dataList;
-				JSONArray pages = (JSONArray) data.get("EricssonMetroEthernetPage");
-				for (Object issueObj : pages.toArray()) {
-					JSONObject issue = (JSONObject) issueObj;
-					System.out.println(issue);
-				}
-			}
-		} catch (Exception e) {
-			// do smth
-			e.printStackTrace();
-		}
-
 		System.out.println(new JsonReader(
 				"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\OR.json")
 						.getLocator("locators.homepage.username.xpath"));
@@ -77,19 +60,17 @@ public class JsonReader {
 	}
 
 	private static void parseEmployeeObject(JSONObject employee) {
-		// Get employee object within list
-		JSONObject employeeObject = (JSONObject) employee.get("employee");
+		Iterator<?> keys = employee.keySet().iterator();
+		while (keys.hasNext()) {
+			Object key = keys.next();
+			JSONObject page = (JSONObject) employee.get(key);
+			// Get employee first name
+			String firstName = (String) page.get("firstName");
+			System.out.println(firstName);
+			// Get employee last name
+			String lastName = (String) page.get("lastName");
+			System.out.println(lastName);
+		}
 
-		// Get employee first name
-		String firstName = (String) employeeObject.get("firstName");
-		System.out.println(firstName);
-
-		// Get employee last name
-		String lastName = (String) employeeObject.get("lastName");
-		System.out.println(lastName);
-
-		// Get employee website name
-		String website = (String) employeeObject.get("website");
-		System.out.println(website);
 	}
 }

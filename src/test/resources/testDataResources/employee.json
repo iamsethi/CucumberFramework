@@ -1,16 +1,36 @@
 [
 	{
-		"employee": {
-			"firstName": "Lokesh",
-			"lastName": "Gupta",
-			"website": "howtodoinjava.com"
+		"UWSOrderSummaryEditPage": {
+			"firstName": "Brian",
+			"lastName": "Lee",
+			"age": 35,
+			"emailAddress": "testbrianlee@gmail.com",
+			"password": "Login@123",
+			"streetAddress": "175 East Town St, Columbus",
+			"city": "Ohio",
+			"postCode": "43214",
+			"state": "Columbus",
+			"country": "United States",
+			"county": "Delhi",
+			"home": "012345678",
+			"mob": "09560146008"
 		}
 	},
 	{
-		"employee": {
+		"EricssonMetroEthernetPage": {
 			"firstName": "Brian",
-			"lastName": "Schultz",
-			"website": "example.com"
+			"lastName": "Lee",
+			"age": 35,
+			"emailAddress": "testbrianlee@gmail.com",
+			"password": "Login@123",
+			"streetAddress": "175 East Town St, Columbus",
+			"city": "Ohio",
+			"postCode": "43214",
+			"state": "Columbus",
+			"country": "United States",
+			"county": "Delhi",
+			"home": "012345678",
+			"mob": "09560146008"
 		}
 	}
 ]
