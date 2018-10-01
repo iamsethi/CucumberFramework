@@ -30,7 +30,7 @@ public class JsonDataReader {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
-		// System.out.println(getLocator("locators.homepage.username.xpath"));  use OR.json
+		// System.out.println(getLocator("locators.homepage.username.xpath"));  use OR.json in this case
 		JSONParser jsonParser = new JSONParser();
 		try (FileReader reader = new FileReader(
 				"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\sfa.json")) {
