@@ -35,21 +35,12 @@ public class JsonReader {
 		System.out.println(new JsonReader(
 				"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\OR.json")
 						.getLocator("locators.homepage.username.xpath"));
-
-		// JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();
-
 		try (FileReader reader = new FileReader(
 				"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\sfa.json")) {
-			// Read JSON file
-			Object obj = jsonParser.parse(reader);
-
-			JSONArray employeeList = (JSONArray) obj;
-			// System.out.println(employeeList);
-
-			// Iterate over employee array
-			employeeList.forEach(data -> parseDataObject((JSONObject) data));
-
+			JSONObject coreData = (JSONObject) jsonParser.parse(reader);
+			JSONArray commondata = (JSONArray) coreData.get("commondata");
+			commondata.forEach(containerPages -> parsePageData((JSONObject) containerPages));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -59,16 +50,17 @@ public class JsonReader {
 		}
 	}
 
-	private static void parseDataObject(JSONObject data) {
+	private static void parsePageData(JSONObject data) {
 		Iterator<?> keys = data.keySet().iterator();
 		while (keys.hasNext()) {
 			Object key = keys.next();
 			JSONObject page = (JSONObject) data.get(key);
+
 			// Get employee first name
-			String firstName = (String) page.get("firstName");
+			String firstName = (String) page.get("tbx_firstName");
 			System.out.println(firstName);
 			// Get employee last name
-			String lastName = (String) page.get("lastName");
+			String lastName = (String) page.get("tbx_lastName");
 			System.out.println(lastName);
 		}
 
