@@ -39,7 +39,7 @@ public class JsonDataReader {
 	public static void main(String args[]) {
 		registerEnvironment();
 		initializeJSON();
-		getContainer("UWSOrderSummaryEditPage");
+		getContainer("EricssonMetroEthernetPage");
 	}
 
 	public static void registerEnvironment() {
@@ -76,14 +76,14 @@ public class JsonDataReader {
 	}
 
 	private static void getContainerPages(HashMap<String, JSONArray> page, String pageName) {
-		page.forEach((key, value) -> {
+		page.forEach((key, dataContainer) -> {
 			if (key.equals(pageName))
-				getSubContainerPages(value);
+				getSubContainerPages(dataContainer);
 		});
 	}
 
-	private static void getSubContainerPages(JSONArray page) {
-		Iterator<?> iterator = page.iterator();
+	private static void getSubContainerPages(JSONArray dataContainer) {
+		Iterator<?> iterator = dataContainer.iterator();
 		while (iterator.hasNext()) {
 			JSONObject subPages = (JSONObject) iterator.next();
 			for (Object subContainer : subPages.keySet()) {
