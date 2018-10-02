@@ -37,7 +37,7 @@ public class JsonDataReader {
 			JSONObject coreData = (JSONObject) jsonParser.parse(reader);
 			JSONArray environments = (JSONArray) coreData.get("Environments");
 			JSONArray commondata = (JSONArray) coreData.get("commondata");
-			commondata.forEach(data -> getContainerPages((JSONObject) data));
+			commondata.forEach(pages -> getContainerPages((JSONObject) pages));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -51,13 +51,25 @@ public class JsonDataReader {
 		Iterator<?> keys = pages.keySet().iterator();
 		while (keys.hasNext()) {
 			Object key = keys.next();
-			JSONObject page = (JSONObject) pages.get(key);
-			// Get employee first name
-			String firstName = (String) page.get("tbx_firstName");
-			System.out.println(firstName);
-			// Get employee last name
-			String lastName = (String) page.get("tbx_lastName");
-			System.out.println(lastName);
+			JSONArray page = (JSONArray) pages.get(key); // key is UWSOrderSummaryEditPage and
+															// EricssonMetroEthernetPage...
+			Iterator<?> iterator = page.iterator();
+			while (iterator.hasNext()) {
+				JSONObject subPages = (JSONObject) iterator.next();
+				for (Object keyz : subPages.keySet()) {
+					// based on you key types
+					String keyStr = (String) keyz;
+					Object keyvalue = subPages.get(keyStr);
+
+					// Print key and value
+					System.out.println("key: " + keyStr + " value: " + keyvalue);
+
+					// for nested objects iteration if required
+					if (keyvalue instanceof JSONObject) {
+					}
+				}
+			}
 		}
+
 	}
 }
