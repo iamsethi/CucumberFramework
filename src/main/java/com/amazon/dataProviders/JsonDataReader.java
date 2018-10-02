@@ -30,13 +30,14 @@ public class JsonDataReader {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
-		// System.out.println(getLocator("locators.homepage.username.xpath"));  use OR.json in this case
+		// System.out.println(getLocator("locators.homepage.username.xpath")); use
+		// OR.json in this case
 		JSONParser jsonParser = new JSONParser();
-		try (FileReader reader = new FileReader(
-				"C:\\Users\\ketan.sethi\\git\\cucumber-selenium\\src\\test\\resources\\testDataResources\\sfa.json")) {
+		try (FileReader reader = new FileReader(dataFile)) {
 			JSONObject coreData = (JSONObject) jsonParser.parse(reader);
+			JSONArray environments = (JSONArray) coreData.get("Environments");
 			JSONArray commondata = (JSONArray) coreData.get("commondata");
-			commondata.forEach(containerPages -> parsePageData((JSONObject) containerPages));
+			commondata.forEach(data -> getContainerPages((JSONObject) data));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -46,12 +47,11 @@ public class JsonDataReader {
 		}
 	}
 
-	private static void parsePageData(JSONObject data) {
-		Iterator<?> keys = data.keySet().iterator();
+	private static void getContainerPages(JSONObject pages) {
+		Iterator<?> keys = pages.keySet().iterator();
 		while (keys.hasNext()) {
 			Object key = keys.next();
-			JSONObject page = (JSONObject) data.get(key);
-
+			JSONObject page = (JSONObject) pages.get(key);
 			// Get employee first name
 			String firstName = (String) page.get("tbx_firstName");
 			System.out.println(firstName);
@@ -59,6 +59,5 @@ public class JsonDataReader {
 			String lastName = (String) page.get("tbx_lastName");
 			System.out.println(lastName);
 		}
-
 	}
 }
