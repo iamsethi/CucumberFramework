@@ -70,22 +70,27 @@ public class JsonDataReader {
 
 	@SuppressWarnings("unchecked")
 	public static void getContainer(String pageName) {
-		commondata.forEach(page -> getContainerPages((JSONObject) page, pageName)); // iterating commondata for
-																					// JSONObjects of String and
-																					// JSONArray;
+		commondata.forEach(page -> {
+			getContainerPage((HashMap<String, JSONArray>) page, pageName);
+		}); // iterating
+			// commondata for
+		// JSONObjects of String and
+		// JSONArray;
 	}
 
-	private static void getContainerPages(HashMap<String, JSONArray> page, String pageName) {
-		page.forEach((key, dataContainer) -> {
-			if (key.equals(pageName))
-				getSubContainerPages(dataContainer);
-		});
+	private static JSONArray getContainerPage(HashMap<String, JSONArray> page, String pageName) {
+		if (page.get(pageName) != null)
+			return getSubContainer(page.get(pageName));
+		else
+			return null;
+
 	}
 
-	private static void getSubContainerPages(JSONArray dataContainer) {
+	@SuppressWarnings("unchecked")
+	private static JSONArray getSubContainer(JSONArray dataContainer) {
 		Iterator<?> iterator = dataContainer.iterator();
 		while (iterator.hasNext()) {
-			JSONObject subPages = (JSONObject) iterator.next();
+			HashMap<String, JSONObject> subPages = (JSONObject) iterator.next();
 			for (Object subContainer : subPages.keySet()) {
 				String keyStr = (String) subContainer;
 				Object keyvalue = subPages.get(keyStr);
@@ -96,6 +101,8 @@ public class JsonDataReader {
 				}
 			}
 		}
+
+		return dataContainer;
 	}
 
 	/*
