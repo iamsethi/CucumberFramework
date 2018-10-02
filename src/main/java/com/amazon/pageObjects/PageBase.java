@@ -19,11 +19,13 @@ public abstract class PageBase {
 	private WebDriver driver;
 	private Logger Log = ILog.getLogger(PageBase.class);
 
+	public static PageBase page;
+
 	public PageBase(WebDriver driver) {
 		if (driver == null)
 			throw new IllegalArgumentException("Driver object is null");
 
-		PageFactory.initElements(driver, this);
+		page = PageFactory.initElements(driver, PageBase.class);
 		this.driver = driver;
 	}
 

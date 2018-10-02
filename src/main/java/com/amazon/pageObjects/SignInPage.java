@@ -16,16 +16,16 @@ public class SignInPage {
 	}
 
 	@FindBy(how = How.NAME, using = "email")
-	private WebElement txtbx_Email;
+	public WebElement txtbx_Email;
 
 	@FindBy(how = How.NAME, using = "password")
-	private WebElement txtbx_Password;
+	public WebElement txtbx_Password;
 
 	@FindBy(how = How.ID, using = "continue")
-	private WebElement txtbx_Continue;
+	public WebElement txtbx_Continue;
 
 	@FindBy(how = How.ID, using = "signInSubmit")
-	private WebElement txtbx_SignInSubmit;
+	public WebElement txtbx_SignInSubmit;
 
 	public void enter_Email(String email) {
 		txtbx_Email.sendKeys(email);
@@ -35,10 +35,10 @@ public class SignInPage {
 		txtbx_Password.sendKeys(pswd);
 	}
 
-	public void perform_SignIn(JSONObject customer) {
-		enter_Email(customer.get("emailAddress").toString());
+	public void perform_SignIn() {
+		enter_Email("testbrianlee@gmail.com");
 		txtbx_Continue.click();
-		enter_Password(customer.get("password").toString());
+		enter_Password("Login@123");
 		txtbx_SignInSubmit.click();
 
 	}

@@ -1,8 +1,7 @@
 package com.amazon.stepDefinitions;
 
-import org.json.simple.JSONObject;
-
 import com.amazon.cucumber.TestContext;
+import com.amazon.dataProviders.JsonDataReader;
 import com.amazon.pageObjects.SignInPage;
 
 import cucumber.api.java.en.When;
@@ -15,13 +14,14 @@ public class SignInPageSteps {
 	public SignInPageSteps(TestContext context) {
 		testContext = context;
 		signInPage = testContext.getPageObjectManager().getSignInPage();
+
 	}
 
 	@When("^I sign in on application$")
 	public void i_sign_in_on_application() {
 		try {
-			JSONObject customer = testContext.getFileReaderManager().getJsonReader().fetchData("Customer");
-			signInPage.perform_SignIn(customer);
+			JsonDataReader.get_data_for_page("UWSOrderSummaryEditPage");
+			signInPage.perform_SignIn();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

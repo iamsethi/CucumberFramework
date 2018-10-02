@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -12,7 +14,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.WebDriver;
 
+import com.amazon.cucumber.TestContext;
 import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 import com.jayway.jsonpath.JsonPath;
@@ -31,15 +35,10 @@ public class JsonDataReader {
 	private static JSONArray environments;
 	private static JSONArray commondata;
 	private static JSONParser jsonParser = new JSONParser();
+	private static WebDriver driver;
 
 	public static String getLocator(String locator) throws IOException {
 		return JsonPath.read(new File(dataFile), "$." + locator);
-	}
-
-	public static void main(String args[]) {
-		registerEnvironment();
-		initializeJSON();
-		getContainer("EricssonMetroEthernetPage");
 	}
 
 	public static void registerEnvironment() {
@@ -69,40 +68,64 @@ public class JsonDataReader {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void getContainer(String pageName) {
-		commondata.forEach(page -> {
-			getContainerPage((HashMap<String, JSONArray>) page, pageName);
-		}); // iterating
-			// commondata for
-		// JSONObjects of String and
-		// JSONArray;
+	public static void get_data_for_page(String pageName) {
+		Iterator<?> iterator = commondata.iterator();
+		while (iterator.hasNext()) {
+			HashMap<String, JSONArray> subPages = (JSONObject) iterator.next();
+			getPageContainer(subPages, pageName);
+		}
+
 	}
 
-	private static JSONArray getContainerPage(HashMap<String, JSONArray> page, String pageName) {
-		if (page.get(pageName) != null)
-			return getSubContainer(page.get(pageName));
+	private static JSONArray getPageContainer(HashMap<String, JSONArray> page, String pageName) {
+		if (page.containsKey(pageName))
+			return getSubContainers(page.get(pageName), pageName);
 		else
 			return null;
 
 	}
 
 	@SuppressWarnings("unchecked")
-	private static JSONArray getSubContainer(JSONArray dataContainer) {
-		Iterator<?> iterator = dataContainer.iterator();
+	private static JSONArray getSubContainers(JSONArray dataContainers, String pageName) {
+		Iterator<?> iterator = dataContainers.iterator();
+		HashMap<String, JSONObject> newHM = new HashMap<>();
 		while (iterator.hasNext()) {
 			HashMap<String, JSONObject> subPages = (JSONObject) iterator.next();
+			newHM.putAll(subPages);
 			for (Object subContainer : subPages.keySet()) {
 				String keyStr = (String) subContainer;
-				Object keyvalue = subPages.get(keyStr);
-				System.out.println("key: " + keyStr);
-				if (keyvalue instanceof JSONObject) {
-					System.out.println("value: " + keyvalue);
-					System.out.println(((JSONObject) keyvalue).get("tbx_county"));
-				}
+				HashMap<String, String> dataTarget = subPages.get(keyStr);
+				dataTarget.forEach((locator, value) -> fillfields(locator, value, pageName));
 			}
 		}
+		return dataContainers;
+	}
 
-		return dataContainer;
+	public static void fillfields(String locator, String value, String pageName) {
+		try {
+			if (locator.startsWith("tbx_")) {
+				// testContext.getPageObjectManager().getSignInPage().txtbx_Email.sendKeys(value);
+				// Method sumInstanceMethod =
+				// testContext.getPageObjectManager().getClass().getMethod("get" + pageName);
+				// Object o = sumInstanceMethod.invoke(testContext.getPageObjectManager());
+				System.out.println(locator);
+			} else if (locator.startsWith("rbn_")) {
+				System.out.println(locator);
+
+			} else if (locator.startsWith("ddl_")) {
+				System.out.println(locator);
+
+			}
+			// } catch (NoSuchMethodException e) {
+			// e.printStackTrace();
+			// } catch (IllegalAccessException e) {
+			// e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// test.log(LogStatus.INFO, "Clicking on : " + locator);
+
 	}
 
 	/*

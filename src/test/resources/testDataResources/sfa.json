@@ -22,7 +22,7 @@
 					"OrderSummary": {
 						"tbx_firstName": "Uws",
 						"tbx_lastName": "Order",
-						"tbx_age": 35,
+						"tbx_age": "35",
 						"tbx_emailAddress": "testbrianlee@gmail.com",
 						"tbx_password": "Login@123",
 						"tbx_streetAddress": "175 East Town St, Columbus",
@@ -37,7 +37,7 @@
 					"CancelOrder": {
 						"tbx_firstName": "Uws",
 						"tbx_lastName": "Order",
-						"tbx_age": 35,
+						"tbx_age": "35",
 						"tbx_emailAddress": "testbrianlee@gmail.com",
 						"tbx_password": "Login@123",
 						"tbx_streetAddress": "175 East Town St, Columbus",
@@ -58,7 +58,7 @@
 					"UwsOrderDetails": {
 						"tbx_firstName": "Uws",
 						"tbx_lastName": "Order",
-						"tbx_age": 35,
+						"tbx_age": "35",
 						"tbx_emailAddress": "testbrianlee@gmail.com",
 						"tbx_password": "Login@123",
 						"tbx_streetAddress": "175 East Town St, Columbus",
@@ -73,7 +73,7 @@
 					"DirectOrder": {
 						"tbx_firstName": "Uws",
 						"tbx_lastName": "Order",
-						"tbx_age": 35,
+						"tbx_age": "35",
 						"tbx_emailAddress": "testbrianlee@gmail.com",
 						"tbx_password": "Login@123",
 						"tbx_streetAddress": "175 East Town St, Columbus",
