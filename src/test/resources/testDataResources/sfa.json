@@ -19,7 +19,7 @@
 		{
 			"UWSOrderSummaryEditPage": [
 				{
-					"OrderSummaryPage": {
+					"OrderSummary": {
 						"tbx_firstName": "Uws",
 						"tbx_lastName": "Order",
 						"tbx_age": 35,
