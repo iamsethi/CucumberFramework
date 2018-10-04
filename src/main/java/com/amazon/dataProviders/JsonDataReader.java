@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -15,10 +16,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.internal.WrapsElement;
 
-import com.amazon.cucumber.TestContext;
 import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
+import com.amazon.managers.PageObjectManager;
+import com.amazon.managers.WebDriverManager;
+import com.amazon.pageObjects.SignInPage;
 import com.jayway.jsonpath.JsonPath;
 
 /**
@@ -105,10 +111,21 @@ public class JsonDataReader {
 		try {
 			if (locator.startsWith("tbx_")) {
 				// testContext.getPageObjectManager().getSignInPage().txtbx_Email.sendKeys(value);
-				// Method sumInstanceMethod =
-				// testContext.getPageObjectManager().getClass().getMethod("get" + pageName);
+				// Method sumInstanceMethod = new PageObjectManager().getClass().getMethod("get"
+				// + pageName);
 				// Object o = sumInstanceMethod.invoke(testContext.getPageObjectManager());
-				System.out.println(locator);
+				Class aClass = SignInPage.class;
+				Field field = aClass.getField("txtbx_Email");
+				Method sumInstanceMethod = PageObjectManager.class.getMethod("getSignInPage");
+
+				PageObjectManager operationsInstance = new PageObjectManager(
+						WebDriverManager.getInstance().getDriver());
+				Object o = sumInstanceMethod.invoke(operationsInstance);
+				field.get(o);
+				WebElement element = ((WrapsElement) field.get(o)).getWrappedElement();
+				element.sendKeys("Test");
+				((WrapsDriver) ((WrapsElement) field.get(o)).getWrappedElement()).getWrappedDriver();
+				// driver.findElement((WebElement) field.get(o));
 			} else if (locator.startsWith("rbn_")) {
 				System.out.println(locator);
 

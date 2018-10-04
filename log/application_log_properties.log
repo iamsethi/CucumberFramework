@@ -1,50 +1,6 @@
-2018-10-02--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
- 2018-10-02--DEBUG-com.amazon.dataProviders.ConfigFileReader:remote
- 2018-10-02--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
- 2018-10-02--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
- 2018-10-02--DEBUG-com.amazon.dataProviders.ConfigFileReader:https://www.amazon.com
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "index.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("index_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("index.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "index.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/index.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "head.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("head_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("head.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "head.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/head.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "nav.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("nav_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("nav.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "nav.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/nav.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "test-view/test-view.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("test-view/test-view_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("test-view/test-view.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "test-view/test-view.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/test-view/test-view.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "test-view/test-view-charts.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("test-view/test-view-charts_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("test-view/test-view-charts.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "test-view/test-view-charts.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/test-view/test-view-charts.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "test-view/bdd.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("test-view/bdd_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("test-view/bdd.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "test-view/bdd.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/test-view/bdd.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "category-view/category-view.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("category-view/category-view_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("category-view/category-view.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "category-view/category-view.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/category-view/category-view.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "author-view/author-view.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("author-view/author-view_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("author-view/author-view.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "author-view/author-view.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/author-view/author-view.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "exception-view/exception-view.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("exception-view/exception-view_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("exception-view/exception-view.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "exception-view/exception-view.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/exception-view/exception-view.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "dashboard-view/dashboard-view.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("dashboard-view/dashboard-view_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("dashboard-view/dashboard-view.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "dashboard-view/dashboard-view.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/dashboard-view/dashboard-view.ftl"
- 2018-10-02--DEBUG-freemarker.cache:Couldn't find template in cache for "logs-view/testrunner-logs-view.ftl"("en", UTF-8, parsed); will try to load it.
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("logs-view/testrunner-logs-view_en.ftl"): Not found
- 2018-10-02--DEBUG-freemarker.cache:TemplateLoader.findTemplateSource("logs-view/testrunner-logs-view.ftl"): Found
- 2018-10-02--DEBUG-freemarker.cache:Loading template for "logs-view/testrunner-logs-view.ftl"("en", UTF-8, parsed) from "jar:file:/C:/Users/ketan.sethi/.m2/repository/com/aventstack/extentreports/3.1.2/extentreports-3.1.2.jar!/com/aventstack/extentreports/view/html-report/logs-view/testrunner-logs-view.ftl"
+2018-10-04--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
+ 2018-10-04--DEBUG-com.amazon.dataProviders.ConfigFileReader:remote
+ 2018-10-04--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
+ 2018-10-04--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
+ 2018-10-04--DEBUG-com.amazon.dataProviders.ConfigFileReader:https://www.amazon.com
  
