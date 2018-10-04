@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProductListingPage {
+public class ProductListingPage extends BasePage{
 	WebDriver driver;
 
 	public ProductListingPage(WebDriver driver) {

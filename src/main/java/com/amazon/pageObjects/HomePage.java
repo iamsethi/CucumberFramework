@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 
-public class HomePage {
+public class HomePage extends BasePage{
 	WebDriver driver;
 
 	public HomePage(WebDriver driver) {

@@ -23,7 +23,7 @@ public class CheckoutPageSteps {
 	@When("^enter \"(.*)\" personal details on checkout page$")
 	public void enter_personal_details_on_checkout_page(String rowID) {
 		try {
-			JsonDataReader.get_data_for_page("EricssonMetroEthernetPage");
+			JsonDataReader.get_data_for_page("UWSOrderSummaryEditPage");
 			// checkoutPage.fill_PersonalDetails(customer);
 		} catch (Exception e) {
 			e.printStackTrace();

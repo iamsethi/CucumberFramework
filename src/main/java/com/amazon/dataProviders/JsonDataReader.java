@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -17,14 +16,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.internal.WrapsElement;
 
 import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 import com.amazon.managers.PageObjectManager;
 import com.amazon.managers.WebDriverManager;
-import com.amazon.pageObjects.SignInPage;
 import com.jayway.jsonpath.JsonPath;
 
 /**
@@ -74,58 +71,58 @@ public class JsonDataReader {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void get_data_for_page(String pageName) {
+	public static HashMap<String, JSONObject> getContainer(String pageName) {
+		boolean isPage = false;
+		HashMap<String, JSONObject> page = new HashMap<String, JSONObject>();
 		Iterator<?> iterator = commondata.iterator();
 		while (iterator.hasNext()) {
-			HashMap<String, JSONArray> subPages = (JSONObject) iterator.next();
-			getPageContainer(subPages, pageName);
+			HashMap<String, JSONArray> pages = (JSONObject) iterator.next();
+			if (pages.containsKey(pageName)) {
+				page = getSubContainers(pages.get(pageName));
+				isPage = true;
+				break;
+			}
 		}
-
-	}
-
-	private static JSONArray getPageContainer(HashMap<String, JSONArray> page, String pageName) {
-		if (page.containsKey(pageName))
-			return getSubContainers(page.get(pageName), pageName);
+		if (isPage == true)
+			return page;
 		else
-			return null;
+			throw new RuntimeException("Page : " + pageName + " doesn't exist in sfa.json");
 
 	}
 
 	@SuppressWarnings("unchecked")
-	private static JSONArray getSubContainers(JSONArray dataContainers, String pageName) {
+	private static HashMap<String, JSONObject> getSubContainers(JSONArray dataContainers) {
 		Iterator<?> iterator = dataContainers.iterator();
-		HashMap<String, JSONObject> newHM = new HashMap<>();
+		HashMap<String, JSONObject> subContainers = new HashMap<>();
 		while (iterator.hasNext()) {
 			HashMap<String, JSONObject> subPages = (JSONObject) iterator.next();
-			newHM.putAll(subPages);
+			subContainers.putAll(subPages);
 			for (Object subContainer : subPages.keySet()) {
-				String keyStr = (String) subContainer;
-				HashMap<String, String> dataTarget = subPages.get(keyStr);
-				dataTarget.forEach((locator, value) -> fillfields(locator, value, pageName));
+				String dataContainer = (String) subContainer;
+				HashMap<String, String> dataTarget = subPages.get(dataContainer);
+				dataTarget.forEach((locator, value) -> fillfields(locator, value, dataContainer));
 			}
 		}
-		return dataContainers;
+		return subContainers;
 	}
 
-	public static void fillfields(String locator, String value, String pageName) {
+	public static void fillfields(String locator, String value, String dataContainer) {
 		try {
 			if (locator.startsWith("tbx_")) {
 				// testContext.getPageObjectManager().getSignInPage().txtbx_Email.sendKeys(value);
 				// Method sumInstanceMethod = new PageObjectManager().getClass().getMethod("get"
 				// + pageName);
 				// Object o = sumInstanceMethod.invoke(testContext.getPageObjectManager());
-				Class aClass = SignInPage.class;
-				Field field = aClass.getField("txtbx_Email");
-				Method sumInstanceMethod = PageObjectManager.class.getMethod("getSignInPage");
+				Class aClass = dataContainer.getClass();
+				Field field = aClass.getField(locator);
+				Method sumInstanceMethod = PageObjectManager.class.getMethod("get" + dataContainer);
 
 				PageObjectManager operationsInstance = new PageObjectManager(
 						WebDriverManager.getInstance().getDriver());
 				Object o = sumInstanceMethod.invoke(operationsInstance);
 				field.get(o);
 				WebElement element = ((WrapsElement) field.get(o)).getWrappedElement();
-				element.sendKeys("Test");
-				((WrapsDriver) ((WrapsElement) field.get(o)).getWrappedElement()).getWrappedDriver();
-				// driver.findElement((WebElement) field.get(o));
+				element.sendKeys(value);
 			} else if (locator.startsWith("rbn_")) {
 				System.out.println(locator);
 

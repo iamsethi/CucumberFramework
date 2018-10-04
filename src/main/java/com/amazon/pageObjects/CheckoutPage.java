@@ -11,7 +11,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class CheckoutPage {
+public class CheckoutPage extends BasePage{
 	WebDriver driver;
 
 	public CheckoutPage(WebDriver driver) {
@@ -20,13 +20,13 @@ public class CheckoutPage {
 	}
 
 	@FindBy(how = How.CSS, using = "#enterAddressFullName")
-	private WebElement txtbx_Name;
+	private WebElement tbx_Name;
 
 	@FindBy(how = How.CSS, using = "#billing_email")
-	private WebElement txtbx_Email;
+	private WebElement tbx_Email;
 
 	@FindBy(how = How.CSS, using = "#enterAddressPhoneNumber")
-	private WebElement txtbx_Phone;
+	private WebElement tbx_Phone;
 
 	@FindBy(how = How.NAME, using = "shipToThisAddress")
 	private WebElement btn_shipToThisAddress;
@@ -41,16 +41,16 @@ public class CheckoutPage {
 	private List<WebElement> country_List;
 
 	@FindBy(how = How.CSS, using = "#enterAddressCity")
-	private WebElement txtbx_City;
+	private WebElement tbx_City;
 
 	@FindBy(how = How.CSS, using = "#enterAddressAddressLine1")
-	private WebElement txtbx_Address;
+	private WebElement tbx_Address;
 
 	@FindBy(how = How.CSS, using = "#enterAddressPostalCode")
-	private WebElement txtbx_PostCode;
+	private WebElement tbx_PostCode;
 
 	@FindBy(how = How.CSS, using = "#enterAddressStateOrRegion")
-	private WebElement txtbx_State;
+	private WebElement tbx_State;
 
 	@FindBy(how = How.LINK_TEXT, using = "enter a new shipping address")
 	private WebElement chkbx_ShipToDifferetAddress;
@@ -65,31 +65,31 @@ public class CheckoutPage {
 	private WebElement btn_PlaceOrder;
 
 	public void enter_Name(String name) {
-		txtbx_Name.sendKeys(name);
+		tbx_Name.sendKeys(name);
 	}
 
 	public void enter_Email(String email) {
-		txtbx_Email.sendKeys(email);
+		tbx_Email.sendKeys(email);
 	}
 
 	public void enter_Phone(String phone) {
-		txtbx_Phone.sendKeys(phone);
+		tbx_Phone.sendKeys(phone);
 	}
 
 	public void enter_City(String city) {
-		txtbx_City.sendKeys(city);
+		tbx_City.sendKeys(city);
 	}
 
 	public void enter_Address(String address) {
-		txtbx_Address.sendKeys(address);
+		tbx_Address.sendKeys(address);
 	}
 
 	public void enter_PostCode(String postCode) {
-		txtbx_PostCode.sendKeys(postCode);
+		tbx_PostCode.sendKeys(postCode);
 	}
 
 	public void enter_State(String state) {
-		txtbx_State.sendKeys(state);
+		tbx_State.sendKeys(state);
 
 	}
 

@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class CartPage {
+public class CartPage extends BasePage {
 	WebDriver driver;
 
 	public CartPage(WebDriver driver) {
