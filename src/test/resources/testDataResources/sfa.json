@@ -37,42 +37,6 @@
 					}
 				}
 			]
-		},
-		{
-			"EricssonMetroEthernetPage": [
-				{
-					"UwsOrderDetails": {
-						"tbx_firstName": "Uws",
-						"tbx_lastName": "Order",
-						"tbx_age": "35",
-						"tbx_emailAddress": "testbrianlee@gmail.com",
-						"tbx_password": "Login@123",
-						"tbx_streetAddress": "175 East Town St, Columbus",
-						"tbx_city": "Ohio",
-						"tbx_postCode": "43214",
-						"tbx_state": "Columbus",
-						"tbx_country": "United States",
-						"tbx_county": "Delhi",
-						"tbx_home": "012345678",
-						"tbx_mob": "09560146008"
-					},
-					"DirectOrder": {
-						"tbx_firstName": "Uws",
-						"tbx_lastName": "Order",
-						"tbx_age": "35",
-						"tbx_emailAddress": "testbrianlee@gmail.com",
-						"tbx_password": "Login@123",
-						"tbx_streetAddress": "175 East Town St, Columbus",
-						"tbx_city": "Ohio",
-						"tbx_postCode": "43214",
-						"tbx_state": "Columbus",
-						"tbx_country": "United States",
-						"tbx_county": "Delhi",
-						"tbx_home": "012345678",
-						"tbx_mob": "09560146008"
-					}
-				}
-			]
 		}
 	]
 }
