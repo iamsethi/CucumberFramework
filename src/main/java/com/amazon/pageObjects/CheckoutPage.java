@@ -2,7 +2,6 @@ package com.amazon.pageObjects;
 
 import java.util.List;
 
-import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class CheckoutPage extends BasePage{
+public class CheckoutPage extends BasePage {
 	WebDriver driver;
 
 	public CheckoutPage(WebDriver driver) {
@@ -20,49 +19,49 @@ public class CheckoutPage extends BasePage{
 	}
 
 	@FindBy(how = How.CSS, using = "#enterAddressFullName")
-	private WebElement tbx_Name;
+	public WebElement tbx_Name;
 
 	@FindBy(how = How.CSS, using = "#billing_email")
-	private WebElement tbx_Email;
+	public WebElement tbx_Email;
 
 	@FindBy(how = How.CSS, using = "#enterAddressPhoneNumber")
-	private WebElement tbx_Phone;
+	public WebElement tbx_Phone;
 
 	@FindBy(how = How.NAME, using = "shipToThisAddress")
-	private WebElement btn_shipToThisAddress;
+	public WebElement btn_shipToThisAddress;
 
 	@FindBy(how = How.CLASS_NAME, using = "a-button-inner")
-	private WebElement btn_dlvrToThisAddress;
+	public WebElement btn_dlvrToThisAddress;
 
 	@FindBy(how = How.CSS, using = "#enterAddressCountryCode")
-	private WebElement drpdwn_CountryDropDownArrow;
+	public WebElement drpdwn_CountryDropDownArrow;
 
 	@FindAll(@FindBy(how = How.CSS, using = "#select2-drop ul li"))
-	private List<WebElement> country_List;
+	public List<WebElement> country_List;
 
 	@FindBy(how = How.CSS, using = "#enterAddressCity")
-	private WebElement tbx_City;
+	public WebElement tbx_City;
 
 	@FindBy(how = How.CSS, using = "#enterAddressAddressLine1")
-	private WebElement tbx_Address;
+	public WebElement tbx_Address;
 
 	@FindBy(how = How.CSS, using = "#enterAddressPostalCode")
-	private WebElement tbx_PostCode;
+	public WebElement tbx_PostCode;
 
 	@FindBy(how = How.CSS, using = "#enterAddressStateOrRegion")
-	private WebElement tbx_State;
+	public WebElement tbx_State;
 
 	@FindBy(how = How.LINK_TEXT, using = "enter a new shipping address")
-	private WebElement chkbx_ShipToDifferetAddress;
+	public WebElement chkbx_ShipToDifferetAddress;
 
 	@FindAll(@FindBy(how = How.CSS, using = "radio-col aok-float-left spacing-right-small"))
-	private List<WebElement> paymentMethod_List;
+	public List<WebElement> paymentMethod_List;
 
 	@FindBy(how = How.CSS, using = "#terms.input-checkbox")
-	private WebElement chkbx_AcceptTermsAndCondition;
+	public WebElement chkbx_AcceptTermsAndCondition;
 
 	@FindBy(how = How.CSS, using = "#place_order")
-	private WebElement btn_PlaceOrder;
+	public WebElement btn_PlaceOrder;
 
 	public void enter_Name(String name) {
 		tbx_Name.sendKeys(name);
@@ -127,17 +126,8 @@ public class CheckoutPage extends BasePage{
 
 	}
 
-	public void fill_PersonalDetails(JSONObject customer) {
-		enter_Name(customer.get("firstName").toString());
-		enter_Address(customer.get("streetAddress").toString());
-		enter_City(customer.get("city").toString());
-		enter_State(customer.get("state").toString());
-		enter_PostCode(customer.get("postCode").toString());
-		select_Country(customer.get("country").toString());
-		enter_Phone(customer.get("mob").toString());
-		btn_shipToThisAddress.click();
-		btn_dlvrToThisAddress.click();
-
+	public void fill_PersonalDetails() {
+		get_data_for_page(this);
 	}
 
 }

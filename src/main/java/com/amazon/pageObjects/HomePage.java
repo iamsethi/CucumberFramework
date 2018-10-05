@@ -18,10 +18,10 @@ public class HomePage extends BasePage{
 	}
 
 	@FindBy(how = How.NAME, using = "field-keywords")
-	private WebElement txtbx_Srch;
+	public WebElement txtbx_Srch;
 
 	@FindBy(how = How.XPATH, using = "//input[@type='submit']")
-	private WebElement txtbx_Go;
+	public WebElement txtbx_Go;
 
 	public void perform_Search(String search) {
 		ILog.info("#######Perform Search#######");

@@ -15,10 +15,10 @@ public class ProductListingPage extends BasePage{
 	}
 
 	@FindBy(how = How.NAME, using = "submit.add-to-cart")
-	private WebElement btn_AddToCart;
+	public WebElement btn_AddToCart;
 
 	@FindBy(how = How.XPATH, using = "(//a[@class='a-link-normal a-text-normal'])[2]")
-	private WebElement prd_List;
+	public WebElement prd_List;
 
 	public void clickOn_AddToCart() {
 		btn_AddToCart.click();

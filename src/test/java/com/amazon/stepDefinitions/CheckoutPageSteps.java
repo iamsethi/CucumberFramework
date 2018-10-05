@@ -1,7 +1,6 @@
 package com.amazon.stepDefinitions;
 
 import com.amazon.cucumber.TestContext;
-import com.amazon.dataProviders.JsonDataReader;
 import com.amazon.pageObjects.CheckoutPage;
 
 import cucumber.api.java.en.When;
@@ -23,8 +22,7 @@ public class CheckoutPageSteps {
 	@When("^enter \"(.*)\" personal details on checkout page$")
 	public void enter_personal_details_on_checkout_page(String rowID) {
 		try {
-			JsonDataReader.get_data_for_page("UWSOrderSummaryEditPage");
-			// checkoutPage.fill_PersonalDetails(customer);
+			checkoutPage.fill_PersonalDetails();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -15,7 +15,7 @@ public class CartPage extends BasePage {
 	}
 
 	@FindBy(how = How.ID, using = "hlb-ptc-btn-native")
-	private WebElement btn_ContinueToCheckout;
+	public WebElement btn_ContinueToCheckout;
 
 	public void clickOn_ContinueToCheckout() {
 		btn_ContinueToCheckout.click();
