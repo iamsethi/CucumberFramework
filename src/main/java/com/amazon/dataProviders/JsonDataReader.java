@@ -1,6 +1,5 @@
 package com.amazon.dataProviders;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,7 +21,6 @@ import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 import com.amazon.managers.PageObjectManager;
 import com.amazon.managers.WebDriverManager;
-import com.jayway.jsonpath.JsonPath;
 
 /**
  * @author Ketan Sethi
@@ -33,16 +31,12 @@ import com.jayway.jsonpath.JsonPath;
 public class JsonDataReader {
 
 	private static String dataFile = FileReaderManager.getInstance().getConfigReader().getTestDataResourcePath();
-	private static Logger Log = ILog.getLogger(ConfigFileReader.class);
+	private static Logger Log = ILog.getLogger(JsonDataReader.class);
 	private static JSONObject coreData;
 	private static JSONArray environments;
 	private static JSONArray commondata;
 	private static JSONParser jsonParser = new JSONParser();
 	private static PageObjectManager pom = new PageObjectManager(WebDriverManager.getInstance().getDriver());
-
-	public static String getLocator(String locator) throws IOException {
-		return JsonPath.read(new File(dataFile), "$." + locator);
-	}
 
 	public static void registerEnvironment() {
 		try (FileReader reader = new FileReader(dataFile)) {
@@ -71,9 +65,9 @@ public class JsonDataReader {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static HashMap<String, JSONObject> getContainer(String pageName) {
+	public static HashMap<String, JSONArray> getContainer(String pageName) {
 		boolean isPage = false;
-		HashMap<String, JSONObject> page = new HashMap<String, JSONObject>();
+		HashMap<String, JSONArray> page = new HashMap<String, JSONArray>();
 		Iterator<?> iterator = commondata.iterator();
 		while (iterator.hasNext()) {
 			HashMap<String, JSONArray> pages = (JSONObject) iterator.next();
@@ -91,46 +85,53 @@ public class JsonDataReader {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static HashMap<String, JSONObject> getSubContainers(JSONArray pageContainer, String pageName) {
+	private static HashMap<String, JSONArray> getSubContainers(JSONArray pageContainer, String pageName) {
 		Iterator<?> iterator = pageContainer.iterator();
-		HashMap<String, JSONObject> subContainers = new HashMap<>();
+		HashMap<String, JSONArray> subContainers = new HashMap<>();
 		while (iterator.hasNext()) {
-			HashMap<String, JSONObject> subPages = (JSONObject) iterator.next();
+			HashMap<String, JSONArray> subPages = (JSONObject) iterator.next();
 			subContainers.putAll(subPages);
 			for (Object subContainer : subPages.keySet()) {
 				String dataTarget = (String) subContainer;
-				HashMap<String, String> kv = subPages.get(dataTarget);
-				kv.forEach((locator, value) -> fillfields(locator, value, dataTarget, pageName));
+				JSONArray containerFields = subPages.get(dataTarget);
+				fillfields(dataTarget, containerFields, pageName);
 			}
 		}
 		return subContainers;
 	}
 
-	public static void fillfields(String locator, String value, String dataTarget, String pageName) {
-		try {
-			Method sumInstanceMethod = PageObjectManager.class.getMethod("get" + pageName);
-			Object o = sumInstanceMethod.invoke(pom);
-			Field field = o.getClass().getField(locator);
-			WebElement element = ((WrapsElement) field.get(o)).getWrappedElement();
-			if (locator.startsWith("tbx_")) {
-				Log.info("Filling " + locator + " with value : " + value + " ");
-				element.sendKeys(value);
-			} else if (locator.startsWith("rbn_")) {
-				Log.info("Filling " + locator + " with value : " + value + " ");
-			} else if (locator.startsWith("ddl_")) {
-				Log.info("Filling " + locator + " with value : " + value + " ");
-			} else if (locator.startsWith("btn_")) {
-				Log.info("Filling " + locator + " with value : " + value + " ");
-				element.click();
+	@SuppressWarnings("unchecked")
+	public static void fillfields(String dataTarget, JSONArray containerFields, String pageName) {
+		Iterator<String> i = containerFields.iterator();
+		while (i.hasNext()) {
+			String fields = i.next();
+			String locator = fields.split(": ")[0];
+			String value = fields.split(": ")[1];
+			try {
+				Method sumInstanceMethod = PageObjectManager.class.getMethod("get" + pageName);
+				Object o = sumInstanceMethod.invoke(pom);
+				Field field = o.getClass().getField(locator);
+				WebElement element = ((WrapsElement) field.get(o)).getWrappedElement();
+				if (locator.startsWith("tbx_")) {
+					Log.info("Filling " + locator + " with value : " + value + " ");
+					element.sendKeys(value);
+				} else if (locator.startsWith("rbn_")) {
+					Log.info("Filling " + locator + " with value : " + value + " ");
+				} else if (locator.startsWith("ddl_")) {
+					Log.info("Filling " + locator + " with value : " + value + " ");
+				} else if (locator.startsWith("btn_")) {
+					Log.info("Filling " + locator + " with value : " + value + " ");
+					element.click();
+				}
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchFieldException e) {
+				e.printStackTrace();
 			}
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
 		}
 	}
 }
