@@ -8,6 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
@@ -65,14 +67,14 @@ public class JsonDataReader {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static HashMap<String, JSONArray> getContainer(String pageName) {
+	public HashMap<String, LinkedHashMap<String, String>> getContainer(String pageName) {
 		boolean isPage = false;
-		HashMap<String, JSONArray> page = new HashMap<String, JSONArray>();
+		HashMap<String, LinkedHashMap<String, String>> page = new HashMap<String, LinkedHashMap<String, String>>();
 		Iterator<?> iterator = commondata.iterator();
 		while (iterator.hasNext()) {
 			HashMap<String, JSONArray> pages = (JSONObject) iterator.next();
 			if (pages.containsKey(pageName)) {
-				page = getSubContainers(pages.get(pageName), pageName);
+				page = getDataTargets(pages.get(pageName), pageName);
 				isPage = true;
 				break;
 			}
@@ -85,28 +87,41 @@ public class JsonDataReader {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static HashMap<String, JSONArray> getSubContainers(JSONArray pageContainer, String pageName) {
+	private static HashMap<String, LinkedHashMap<String, String>> getDataTargets(JSONArray pageContainer,
+			String pageName) {
+		HashMap<String, LinkedHashMap<String, String>> container = new HashMap<String, LinkedHashMap<String, String>>();
 		Iterator<?> iterator = pageContainer.iterator();
-		HashMap<String, JSONArray> subContainers = new HashMap<>();
 		while (iterator.hasNext()) {
 			HashMap<String, JSONArray> subPages = (JSONObject) iterator.next();
-			subContainers.putAll(subPages);
 			for (Object subContainer : subPages.keySet()) {
 				String dataTarget = (String) subContainer;
 				JSONArray containerFields = subPages.get(dataTarget);
-				fillfields(dataTarget, containerFields, pageName);
+				container.put(dataTarget, getContainerFields(containerFields)); // key-cancelorder value is
+																				// (tbx_name,brian)
+				// fillAllFields(pageName, dataTarget, getContainerFields(containerFields));
 			}
 		}
-		return subContainers;
+		return container;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void fillfields(String dataTarget, JSONArray containerFields, String pageName) {
+	public static LinkedHashMap<String, String> getContainerFields(JSONArray containerFields) {
+		LinkedHashMap<String, String> kv = new LinkedHashMap<String, String>();
 		Iterator<String> i = containerFields.iterator();
 		while (i.hasNext()) {
 			String fields = i.next();
-			String locator = fields.split(": ")[0];
-			String value = fields.split(": ")[1];
+			String locator = fields.split(": ")[0]; // tbx_name
+			String value = fields.split(": ")[1]; // Brian
+			kv.put(locator, value);
+		}
+		return kv;
+
+	}
+
+	public void fillFields(String pageName, String dataTarget, HashMap<String, String> containerFields) {
+		for (Map.Entry<String, String> entry : containerFields.entrySet()) {
+			String locator = entry.getKey();
+			String value = entry.getValue();
 			try {
 				Method sumInstanceMethod = PageObjectManager.class.getMethod("get" + pageName);
 				Object o = sumInstanceMethod.invoke(pom);

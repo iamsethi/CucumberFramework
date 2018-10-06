@@ -127,7 +127,7 @@ public class CheckoutPage extends BasePage {
 	}
 
 	public void fill_PersonalDetails() {
-		get_data_for_page(this);
+		fillAllFields(this, "CancelOrder");
 	}
 
 }
