@@ -9,6 +9,10 @@ public class BasePage {
 
 	public HashMap<String, LinkedHashMap<String, String>> get_data_for_page(BasePage page) {
 		return FileReaderManager.getInstance().getJsonReader().getContainer(page.getClass().getSimpleName());
+		// String is ShippingAddress and LinkedHashMap<String, String> is
+		// (tbx_name,brian)
+		// String is CancelOrder value and LinkedHashMap<String, String> is
+		// (tbx_name,brian)
 	}
 
 	public void fillAllFields(BasePage page, String dataTarget) {
