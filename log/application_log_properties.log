@@ -1,12 +1,6 @@
-2018-10-06--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
- 2018-10-06--DEBUG-com.amazon.dataProviders.ConfigFileReader:remote
- 2018-10-06--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
- 2018-10-06--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
- 2018-10-06--DEBUG-com.amazon.dataProviders.ConfigFileReader:https://www.amazon.com
- 2018-10-06--INFO -com.amazon.dataProviders.JsonDataReader:Filling tbx_Name with value : Brian Data Driven 
- 2018-10-06--INFO -com.amazon.dataProviders.JsonDataReader:Filling tbx_Address with value : 175 East Town St, Columbus 
- 2018-10-06--INFO -com.amazon.dataProviders.JsonDataReader:Filling tbx_City with value : Ohio 
- 2018-10-06--INFO -com.amazon.dataProviders.JsonDataReader:Filling tbx_Phone with value : 09560146008 
- 2018-10-06--INFO -com.amazon.dataProviders.JsonDataReader:Filling btn_shipToThisAddress with value : click 
- 2018-10-06--INFO -com.amazon.dataProviders.JsonDataReader:Filling btn_dlvrToThisAddress with value : click 
+2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
+ 2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:remote
+ 2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
+ 2018-10-07--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
+ 2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:https://www.amazon.com
  
