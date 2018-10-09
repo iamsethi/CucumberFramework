@@ -1,6 +1,6 @@
-2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
- 2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:remote
- 2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
- 2018-10-07--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
- 2018-10-07--DEBUG-com.amazon.dataProviders.ConfigFileReader:https://www.amazon.com
+2018-10-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
+ 2018-10-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:remote
+ 2018-10-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
+ 2018-10-09--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
+ 2018-10-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:https://www.amazon.com
  
