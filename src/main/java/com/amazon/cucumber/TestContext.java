@@ -1,5 +1,8 @@
 package com.amazon.cucumber;
 
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.amazon.database.TletIdrDao;
 import com.amazon.managers.FileReaderManager;
 import com.amazon.managers.PageObjectManager;
@@ -10,13 +13,15 @@ public class TestContext {
 	private FileReaderManager fileReaderManager;
 	private PageObjectManager pageObjectManager;
 	private TletIdrDao tletIdrDao;
+	private static final String confFile = "/spring-context/applicationContext-smoke-suite.xml";
+	private static ConfigurableApplicationContext context;
 
 	public TestContext() {
 		webDriverManager = WebDriverManager.getInstance();
 		fileReaderManager = FileReaderManager.getInstance();
 		pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
-		tletIdrDao = new TletIdrDao();
-
+		context = new ClassPathXmlApplicationContext(confFile);
+		tletIdrDao = context.getBean(TletIdrDao.class);
 	}
 
 	public WebDriverManager getWebDriverManager() {

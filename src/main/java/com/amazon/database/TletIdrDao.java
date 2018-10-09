@@ -1,32 +1,31 @@
 package com.amazon.database;
 
+import javax.sql.DataSource;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-@Configuration
-@PropertySource("classpath:application-sql.properties")
-public class TletIdrDao {
+import com.amazon.interfaces.ILog;
 
-	private static final String confFile = "/spring-context/applicationContext-smoke-suite.xml";
-	private ConfigurableApplicationContext context;
-	private JdbcTemplate jdbcTemplateObject;
+public class TletIdrDao {
+	private static Logger Log = ILog.getLogger(TletIdrDao.class);
+
+	private JdbcTemplate jdbcTemplate;
+	private DataSource dataSources;
 
 	/** The select party id by TL id. */
 	@Value("${select.partyIdByTLId.sql}")
 	private String selectPartyIdByTLId;
 
-	public TletIdrDao() {
-		context = new ClassPathXmlApplicationContext(confFile);
-		jdbcTemplateObject = context.getBean(JdbcTemplate.class);
+	public void setDataSource(DataSource dataSource) {
+		this.dataSources = dataSource;
+		jdbcTemplate = new JdbcTemplate(dataSources);
 	}
 
 	public void deleteTradeLetter(String tradeLetterId) {
-		System.out.println(selectPartyIdByTLId);
-		jdbcTemplateObject.execute("SELECT * FROM TRADE_LETTER");
+		Log.info(selectPartyIdByTLId);
+		jdbcTemplate.execute("SELECT * FROM TRADE_LETTER");
 
 	}
 
