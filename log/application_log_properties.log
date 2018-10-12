@@ -1,5 +1,6 @@
 2018-10-11--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
  2018-10-11--DEBUG-com.amazon.dataProviders.ConfigFileReader:remote
- 2018-10-11--INFO -com.amazon.api.TwitterStepDefinition:The Tweet ID:1050380239707066368
+ 2018-10-11--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
+ 2018-10-11--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
  2018-10-11--INFO -com.amazon.stepDefinitions.Hooks:Closing Browser !!!
  
