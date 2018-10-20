@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 
 import com.amazon.constants.EndPoints;
 import com.amazon.constants.Path;
-import com.amazon.helper.RestUtilities;
 import com.amazon.interfaces.ILog;
 
 import cucumber.api.java.en.When;
