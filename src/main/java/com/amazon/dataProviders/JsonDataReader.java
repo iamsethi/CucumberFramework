@@ -19,10 +19,12 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 
+import com.amazon.cucumber.TestContext;
 import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 import com.amazon.managers.PageObjectManager;
 import com.amazon.managers.WebDriverManager;
+import com.amazon.pageObjects.CheckoutPage;
 
 /**
  * @author Ketan Sethi
@@ -31,6 +33,7 @@ import com.amazon.managers.WebDriverManager;
  *
  */
 public class JsonDataReader {
+
 
 	private static String dataFile = FileReaderManager.getInstance().getConfigReader().getTestDataResourcePath();
 	private static Logger Log = ILog.getLogger(JsonDataReader.class);
@@ -124,6 +127,7 @@ public class JsonDataReader {
 			String value = entry.getValue();
 			try {
 				Method sumInstanceMethod = PageObjectManager.class.getMethod("get" + pageName);
+				//TestContext.class.getMethod("getPageObjectManager"); //testContext.getPageObjectManager().getCheckoutPage();
 				Object o = sumInstanceMethod.invoke(pom);
 				Field field = o.getClass().getField(locator);
 				WebElement element = ((WrapsElement) field.get(o)).getWrappedElement();

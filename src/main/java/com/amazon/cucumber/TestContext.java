@@ -16,7 +16,7 @@ public class TestContext {
 	private static final String confFile = "/spring-context/applicationContext-smoke-suite.xml";
 	private static ConfigurableApplicationContext context;
 
-	public TestContext() {
+	public TestContext() throws Exception {
 		webDriverManager = WebDriverManager.getInstance();
 		fileReaderManager = FileReaderManager.getInstance();
 		pageObjectManager = new PageObjectManager(webDriverManager.getDriver());

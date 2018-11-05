@@ -53,7 +53,7 @@ public class Hooks {
 
 	@After(order = 0)
 	public void AfterSteps() {
-		testContext.getWebDriverManager().quitDriver();
+		testContext.getWebDriverManager().closeDriver();
 	}
 
 }

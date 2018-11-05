@@ -18,11 +18,8 @@ public class SignInPageSteps {
 
 	@When("^I sign in on application$")
 	public void i_sign_in_on_application() {
-		try {
-			signInPage.perform_SignIn();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		signInPage.perform_SignIn();
 
 	}
 

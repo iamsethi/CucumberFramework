@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.oracle</groupId>
-	<artifactId>CucumberFramework</artifactId>
+	<artifactId>cucumber-selenium</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>CucumberFramework</name>
@@ -173,9 +173,6 @@
 				<configuration>
 					<forkCount>10</forkCount>
 					<reuseForks>true</reuseForks>
-					<includes>
-						<include>**/Parallel*IT.class</include>
-					</includes>
 				</configuration>
 			</plugin>
 			<plugin>

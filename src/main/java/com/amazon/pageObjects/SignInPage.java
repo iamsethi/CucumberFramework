@@ -36,7 +36,7 @@ public class SignInPage extends BasePage {
 
 	public void perform_SignIn() {
 		enter_Email("testbrianlee@gmail.com");
-		txtbx_Continue.click();
+		//txtbx_Continue.click();
 		enter_Password("Login@123");
 		txtbx_SignInSubmit.click();
 

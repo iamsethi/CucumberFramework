@@ -30,7 +30,9 @@ public class PageObjectManager {
 	}
 
 	public CartPage getCartPage() {
-		return (cartPage == null) ? cartPage = new CartPage(driver) : cartPage;
+		System.out.println("***"+cartPage+"####");
+		return (cartPage == null) ? this.cartPage = new CartPage(driver) : cartPage;
+		
 	}
 
 	public CheckoutPage getCheckoutPage() {
