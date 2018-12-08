@@ -119,7 +119,7 @@ public class WebDriverManager {
 			case FIREFOX: // about:config
 				FirefoxOptions ffOptions = new FirefoxOptions();
 				Log.debug("Launching Firefox browser !!!");
-				webDriver.set(new FirefoxDriver(caps));
+				webDriver.set(new FirefoxDriver(ffOptions));
 				break;
 			case CHROME: // chrome://flags
 				ChromeOptions chOptions = new ChromeOptions();
@@ -136,7 +136,7 @@ public class WebDriverManager {
 					processCHOptions(chOptions, optPreferences);
 				}
 				Log.debug("Launching Chrome browser !!!");
-				webDriver.set(new ChromeDriver(caps));
+				webDriver.set(new ChromeDriver(chOptions));
 				break;
 			case INTERNETEXPLORER:
 				caps = DesiredCapabilities.internetExplorer();
@@ -168,8 +168,7 @@ public class WebDriverManager {
 	 * overloaded setDriver method to switch driver to specific AppiumDriver if
 	 * running concurrent drivers
 	 *
-	 * @param driver
-	 *            AppiumDriver instance to switch to
+	 * @param driver AppiumDriver instance to switch to
 	 */
 	public void setDriver(AppiumDriver<MobileElement> driver) {
 		mobileDriver.set(driver);
@@ -190,8 +189,7 @@ public class WebDriverManager {
 	/**
 	 * getDriver method will retrieve the active AppiumDriver
 	 *
-	 * @param mobile
-	 *            boolean parameter
+	 * @param mobile boolean parameter
 	 * @return AppiumDriver
 	 */
 	public AppiumDriver<MobileElement> getDriver(boolean mobile) {
@@ -269,10 +267,8 @@ public class WebDriverManager {
 	/**
 	 * Process Chrome Options method to override default browser driver behavior
 	 *
-	 * @param caps
-	 *            - the ChromeOptions object
-	 * @param options
-	 *            - the key: value pair map
+	 * @param caps    - the ChromeOptions object
+	 * @param options - the key: value pair map
 	 * @throws Exception
 	 */
 	private void processCHOptions(ChromeOptions chOptions, Map<String, Object>[] options) {
@@ -289,9 +285,5 @@ public class WebDriverManager {
 			}
 		}
 	}
-	
-
-	
-	
 
 }

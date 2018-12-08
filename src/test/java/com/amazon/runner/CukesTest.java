@@ -18,7 +18,7 @@ import cucumber.api.junit.Cucumber;
  * A sample test to demonstrate
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/features/regressionTests", glue = {
+@CucumberOptions(features = "src/test/resources/features/regressionTests/End2End_Tests.feature", glue = {
 		"com.amazon.stepDefinitions" }, plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html" }, monochrome = true)
 

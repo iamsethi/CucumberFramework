@@ -30,16 +30,23 @@ public class PageObjectManager {
 	}
 
 	public CartPage getCartPage() {
-		System.out.println("***"+cartPage+"####");
-		return (cartPage == null) ? this.cartPage = new CartPage(driver) : cartPage;
-		
+		return (cartPage == null) ? cartPage = new CartPage(driver) : cartPage;
+
 	}
 
 	public CheckoutPage getCheckoutPage() {
-		return (checkoutPage == null) ? checkoutPage = new CheckoutPage(driver) : checkoutPage;
+		if (checkoutPage == null) {
+			this.checkoutPage = new CheckoutPage(driver);
+			System.out.println("if" + "-->" + this.checkoutPage);
+			return this.checkoutPage;
+		} else {
+			System.out.println("else" + "-->" + checkoutPage);
+			return checkoutPage;
+		}
 	}
 
 	public SignInPage getSignInPage() {
 		return (signInPage == null) ? signInPage = new SignInPage(driver) : signInPage;
 	}
+
 }

@@ -19,7 +19,6 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 
-import com.amazon.cucumber.TestContext;
 import com.amazon.interfaces.ILog;
 import com.amazon.managers.FileReaderManager;
 import com.amazon.managers.PageObjectManager;
@@ -33,15 +32,12 @@ import com.amazon.pageObjects.CheckoutPage;
  *
  */
 public class JsonDataReader {
-
-
 	private static String dataFile = FileReaderManager.getInstance().getConfigReader().getTestDataResourcePath();
 	private static Logger Log = ILog.getLogger(JsonDataReader.class);
 	private static JSONObject coreData;
 	private static JSONArray environments;
 	private static JSONArray commondata;
 	private static JSONParser jsonParser = new JSONParser();
-	private static PageObjectManager pom = new PageObjectManager(WebDriverManager.getInstance().getDriver());
 
 	public static void registerEnvironment() {
 		try (FileReader reader = new FileReader(dataFile)) {
@@ -70,7 +66,7 @@ public class JsonDataReader {
 	}
 
 	@SuppressWarnings("unchecked")
-	public HashMap<String, LinkedHashMap<String, String>> getContainer(String pageName) {
+	public static HashMap<String, LinkedHashMap<String, String>> getContainer(String pageName) {
 		boolean isPage = false;
 		HashMap<String, LinkedHashMap<String, String>> page = new HashMap<String, LinkedHashMap<String, String>>();
 		Iterator<?> iterator = commondata.iterator();
@@ -121,16 +117,20 @@ public class JsonDataReader {
 
 	}
 
-	public void fillFields(String pageName, String dataTarget, HashMap<String, String> containerFields) {
+	public static void fillFields(String pageName, String dataTarget, HashMap<String, String> containerFields) {
 		for (Map.Entry<String, String> entry : containerFields.entrySet()) {
 			String locator = entry.getKey();
 			String value = entry.getValue();
 			try {
-				Method sumInstanceMethod = PageObjectManager.class.getMethod("get" + pageName);
-				//TestContext.class.getMethod("getPageObjectManager"); //testContext.getPageObjectManager().getCheckoutPage();
-				Object o = sumInstanceMethod.invoke(pom);
-				Field field = o.getClass().getField(locator);
+				Class aClass = CheckoutPage.class;
+				Field field = aClass.getField(locator);
+				Method sumInstanceMethod = PageObjectManager.class.getMethod("getCheckoutPage");
+				PageObjectManager operationsInstance = new PageObjectManager(
+						WebDriverManager.getInstance().getDriver());
+				Object o = sumInstanceMethod.invoke(operationsInstance);
+				field.get(o);
 				WebElement element = ((WrapsElement) field.get(o)).getWrappedElement();
+				element.sendKeys("Test");
 				if (locator.startsWith("tbx_")) {
 					Log.info("Filling " + locator + " with value : " + value + " ");
 					element.sendKeys(value);
