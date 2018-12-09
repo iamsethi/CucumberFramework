@@ -18,7 +18,7 @@ public class Hooks {
 	TestContext testContext;
 
 	public Hooks(TestContext context) {
-		testContext = context;
+		this.testContext = context;
 	}
 
 	@Before
@@ -29,6 +29,7 @@ public class Hooks {
 	@After(order = 1)
 	public void afterScenario(Scenario scenario) {
 		if (scenario.isFailed()) {
+			testContext.getTletIdrDao().insertTradeLetter(scenario.getId());
 			String screenshotName = scenario.getName().replaceAll(" ", "_");
 			try {
 				// This takes a screenshot from the driver at save it to the specified location

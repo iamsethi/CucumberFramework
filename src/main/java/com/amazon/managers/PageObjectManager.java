@@ -31,18 +31,10 @@ public class PageObjectManager {
 
 	public CartPage getCartPage() {
 		return (cartPage == null) ? cartPage = new CartPage(driver) : cartPage;
-
 	}
 
 	public CheckoutPage getCheckoutPage() {
-		if (checkoutPage == null) {
-			this.checkoutPage = new CheckoutPage(driver);
-			System.out.println("if" + "-->" + this.checkoutPage);
-			return this.checkoutPage;
-		} else {
-			System.out.println("else" + "-->" + checkoutPage);
-			return checkoutPage;
-		}
+		return (checkoutPage == null) ? checkoutPage = new CheckoutPage(driver) : checkoutPage;
 	}
 
 	public SignInPage getSignInPage() {
