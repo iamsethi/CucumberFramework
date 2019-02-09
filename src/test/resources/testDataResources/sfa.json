@@ -1,16 +1,32 @@
 {
-	"Environments": [
-		{
-			"ITV1": [
-				"url: https://www.amazon.com",
-				"tbx_username: testbrianlee@gmail.com",
-				"tbx_password: Login@123"
-			],
-			"ITV2": [
-				"url: https://www.amazon.com",
-				"tbx_username: testbrianlee@gmail.com",
-				"tbx_password: Login@123"
-			]
-		}
-	]
+	"Environments": {
+		"ITV1": [
+			"url: https://www.amazon.com",
+			"tbx_username: testbrianlee@gmail.com",
+			"tbx_password: Login@123"
+		],
+		"ITV2": [
+			"url: https://www.amazon.com",
+			"tbx_username: testbrianlee@gmail.com",
+			"tbx_password: Login@123"
+		]
+	},
+	"commondata": {
+		"ShippingAddress": [
+			"tbx_Name: Brian Data Driven",
+			"tbx_Address: 175 East Town St, Columbus",
+			"tbx_City: Ohio",
+			"tbx_Phone: 09560146008",
+			"btn_shipToThisAddress: click",
+			"btn_dlvrToThisAddress: click"
+		],
+		"CancelOrder": [
+			"tbx_Name: Brian Data Driven",
+			"tbx_Address: 175 East Town St, Columbus",
+			"tbx_City: Ohio",
+			"tbx_Phone: 09560146008",
+			"btn_shipToThisAddress: click",
+			"btn_dlvrToThisAddress: click"
+		]
+	}
 }
