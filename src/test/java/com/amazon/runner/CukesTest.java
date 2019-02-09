@@ -18,7 +18,7 @@ import cucumber.api.junit.Cucumber;
  * A sample test to demonstrate
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/features/regressionTests/End2End_Tests.feature", glue = {
+@CucumberOptions(features = "src/test/resources/features/regressionTests/", tags = { "@regression" }, glue = {
 		"com.amazon.stepDefinitions" }, plugin = {
 				"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html" }, monochrome = true)
 
@@ -26,7 +26,7 @@ public class CukesTest {
 
 	@BeforeClass
 	public static void setUp() throws Exception {
-		JsonDataReader.registerEnvironment();
+		JsonDataReader.registerEnvironment("ITV1");
 		JsonDataReader.initializeJSON();
 		WebDriverManager.getInstance().setDriver();
 	}

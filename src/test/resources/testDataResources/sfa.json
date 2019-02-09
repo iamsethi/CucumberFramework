@@ -14,7 +14,7 @@
 	"commondata": {
 		"CheckoutPage": {
 			"ShippingAddress": [
-				"tbx_Name: Brian Data Driven",
+				"tbx_Name: Brian ShippingAddress",
 				"tbx_Address: 175 East Town St, Columbus",
 				"tbx_City: Ohio",
 				"tbx_Phone: 09560146008",
@@ -22,7 +22,7 @@
 				"btn_dlvrToThisAddress: click"
 			],
 			"CancelOrder": [
-				"tbx_Name: Brian Data Driven",
+				"tbx_Name: Brian CancelOrder",
 				"tbx_Address: 175 East Town St, Columbus",
 				"tbx_City: Ohio",
 				"tbx_Phone: 09560146008",

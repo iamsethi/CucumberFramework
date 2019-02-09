@@ -1,0 +1,6 @@
+2019-02-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:chrome
+ 2019-02-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:local
+ 2019-02-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:src/test/resources/drivers/win_chromedriver.exe
+ 2019-02-09--DEBUG-com.amazon.managers.WebDriverManager:Launching Chrome browser !!!
+ 2019-02-09--DEBUG-com.amazon.dataProviders.ConfigFileReader:https://www.amazon.com
+ 
