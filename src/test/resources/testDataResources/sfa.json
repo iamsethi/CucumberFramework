@@ -17,9 +17,7 @@
 				"tbx_Name: Brian ShippingAddress",
 				"tbx_Address: 175 East Town St, Columbus",
 				"tbx_City: Ohio",
-				"tbx_Phone: 09560146008",
-				"btn_shipToThisAddress: click",
-				"btn_dlvrToThisAddress: click"
+				"tbx_Phone: 09560146008"
 			],
 			"CancelOrder": [
 				"tbx_Name: Brian CancelOrder",

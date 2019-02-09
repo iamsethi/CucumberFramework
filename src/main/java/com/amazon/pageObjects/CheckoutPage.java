@@ -10,6 +10,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.amazon.dataProviders.JsonDataReader;
+
 public class CheckoutPage extends BasePage {
 	WebDriver driver;
 
@@ -127,7 +129,7 @@ public class CheckoutPage extends BasePage {
 	}
 
 	public void fill_PersonalDetails() {
-		fillAllFields(this, "CancelOrder");
+		JsonDataReader.fillAllFields(this.getClass().getSimpleName());
 	}
 
 }

@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
@@ -32,6 +34,7 @@ public class JsonDataReader {
 		try (FileReader reader = new FileReader(dataFile)) {
 			jsonObject = gson.fromJson(new FileReader(dataFile), JsonObject.class);
 			environments = jsonObject.getAsJsonObject("Environments");
+			System.out.println(environments.getAsJsonArray(envn));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -46,6 +49,17 @@ public class JsonDataReader {
 		commondata = jsonObject.getAsJsonObject("commondata");
 	}
 
+	public static void fillAllFields(String pageName) {
+		JsonElement subContainers = getAllSubContainers(pageName);
+		Set<Map.Entry<String, JsonElement>> s = subContainers.getAsJsonObject().entrySet();
+		Iterator<Map.Entry<String, JsonElement>> i = s.iterator();
+		while (i.hasNext()) {
+			Map.Entry<String, JsonElement> m = i.next();
+			JsonDataReader.fillCustomFields(pageName, m.getKey());
+		}
+
+	}
+
 	public static void fillCustomFields(String pageName, String dataTarget) {
 		JsonElement page = commondata.get(pageName);
 		JsonElement dataContainer = getDataContainer(page, dataTarget);
@@ -53,8 +67,8 @@ public class JsonDataReader {
 	}
 
 	public static JsonElement getDataContainer(JsonElement page, String dataTarget) {
-		JsonObject obj = page.getAsJsonObject();
-		return obj.get(dataTarget);
+		JsonObject dataContainer = page.getAsJsonObject();
+		return dataContainer.get(dataTarget);
 	}
 
 	public static void fillFields(JsonElement page, JsonElement dataContainer) {
@@ -74,6 +88,7 @@ public class JsonDataReader {
 				element.sendKeys("Test");
 				if (locator.startsWith("tbx_")) {
 					// Log.info("Filling " + locator + " with value : " + value + " ");
+					element.clear();
 					element.sendKeys(value);
 				} else if (locator.startsWith("rbn_")) {
 					// Log.info("Filling " + locator + " with value : " + value + " ");
@@ -106,10 +121,10 @@ public class JsonDataReader {
 		return fields;
 	}
 
-	public void getAllSubContainers(String pageName) {
+	public static JsonElement getAllSubContainers(String pageName) {
 		JsonElement page = commondata.get(pageName);
-		JsonObject obj = page.getAsJsonObject();
-		System.out.println(obj.keySet());
+		JsonObject subContainers = page.getAsJsonObject();
+		return subContainers;
 	}
 
 }
