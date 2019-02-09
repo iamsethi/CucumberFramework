@@ -12,7 +12,9 @@ public class FileReaderManager {// Singleton Design Pattern
 	 * potentially cause issues during concurrent access to the same logger file. We
 	 * can use the logger utility class as a singleton and provide a global point of
 	 * reference, so that each user can use this utility and no 2 users access it at
-	 * same time. Configuration File: This is another potential candidate for
+	 * same time. 
+	 * 
+	 * Configuration File: This is another potential candidate for
 	 * Singleton pattern because this has a performance benefit as it prevents
 	 * multiple users to repeatedly access and read the configuration file or
 	 * properties file. It creates a single instance of the configuration file which
